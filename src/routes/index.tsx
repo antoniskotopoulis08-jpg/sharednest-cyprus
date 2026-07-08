@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import {
   ShieldCheck, Sparkles, ArrowRight, MapPin, Waves, Scale,
   Landmark, FileCheck, Handshake, Search, Users, KeyRound, ArrowUpRight,
+  Calculator,
 } from "lucide-react";
 import heroImg from "@/assets/hero-villa.jpg";
 import limassolImg from "@/assets/prop-limassol.jpg";
