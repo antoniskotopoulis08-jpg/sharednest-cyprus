@@ -200,9 +200,10 @@ function InvestPage() {
           <Disclaimer />
         </div>
         <p className="mt-4 text-xs text-muted-foreground/80 leading-relaxed max-w-3xl">
-          Share B&amp;B does not promise guaranteed returns. All figures are estimates only.
-          Investment outcomes depend on market conditions, occupancy, fees and resale timing.
-          Speak with a licensed financial or tax advisor before committing capital.
+          All figures shown are estimated rental potential and illustrative costs for
+          informational purposes only. Investment outcomes depend on market conditions,
+          occupancy, fees, and resale timing. Please speak with licensed financial, tax,
+          and legal professionals before making decisions.
         </p>
       </section>
     </div>
