@@ -80,8 +80,8 @@ function ModeToggle({ mode, setMode }: { mode: Mode; setMode: (m: Mode) => void 
         onClick={() => setMode("invest")}
         className={`${base} ${
           mode === "invest"
-            ? "bg-gradient-to-r from-gold to-gold-foreground text-background shadow-lg"
-            : "text-muted-foreground hover:text-foreground"
+            ? "bg-gold text-gold-foreground shadow-lg"
+            : "text-foreground/75 hover:text-foreground"
         }`}
       >
         <TrendingUp className="h-4 w-4" />
@@ -92,8 +92,8 @@ function ModeToggle({ mode, setMode }: { mode: Mode; setMode: (m: Mode) => void 
         onClick={() => setMode("residency")}
         className={`${base} ${
           mode === "residency"
-            ? "bg-gradient-to-r from-gold to-gold-foreground text-background shadow-lg"
-            : "text-muted-foreground hover:text-foreground"
+            ? "bg-gold text-gold-foreground shadow-lg"
+            : "text-foreground/75 hover:text-foreground"
         }`}
       >
         <Home className="h-4 w-4" />
