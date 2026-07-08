@@ -3,6 +3,7 @@ import { useState } from "react";
 import { properties, formatEUR } from "@/lib/properties";
 import { Heart, Users, Calculator, Bell } from "lucide-react";
 import { Disclaimer } from "@/components/disclaimer";
+import { CountUp } from "@/components/count-up";
 
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
