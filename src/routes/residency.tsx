@@ -172,7 +172,7 @@ function ResidencyPage() {
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 to="/matchmaker"
-                className="inline-flex items-center gap-2 rounded-md bg-gradient-to-r from-gold to-gold-foreground text-background px-5 py-3 text-sm font-medium hover:opacity-90 transition-opacity"
+                className="inline-flex items-center gap-2 rounded-md bg-gold text-gold-foreground px-5 py-3 text-sm font-medium hover:opacity-90 transition-opacity"
               >
                 <Sparkles className="h-4 w-4" /> Start AI Matchmaker
               </Link>
