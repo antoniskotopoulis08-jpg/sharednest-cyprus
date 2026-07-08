@@ -147,18 +147,18 @@ function Hero() {
               Cyprus · Co-ownership marketplace
             </div>
 
-            <h1 className="mt-7 font-serif tracking-tight text-5xl md:text-7xl lg:text-[5.25rem] leading-[0.98]">
+            <h1 className="mt-5 font-serif tracking-tight text-5xl md:text-7xl lg:text-[5.25rem] leading-[0.98]">
               Own a share of{" "}
               <em className="italic text-[color:var(--gold)] font-serif">Cyprus'</em>{" "}
               most desirable homes.
             </h1>
 
-            <p className="mt-8 max-w-xl text-lg text-white/70 leading-relaxed">
+            <p className="mt-6 max-w-xl text-lg text-white/70 leading-relaxed">
               SharedNest uses AI to match buyers with co-ownership opportunities
               based on budget, lifestyle, location, and ownership goals.
             </p>
 
-            <div className="mt-10 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 to="/browse"
                 className="group inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-medium text-[color:var(--gold-foreground)] hover:opacity-90 transition-all"
