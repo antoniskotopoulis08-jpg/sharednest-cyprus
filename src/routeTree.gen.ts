@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as MatchmakerRouteImport } from './routes/matchmaker'
 import { Route as ListPropertyRouteImport } from './routes/list-property'
+import { Route as InvestRouteImport } from './routes/invest'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -33,6 +34,11 @@ const MatchmakerRoute = MatchmakerRouteImport.update({
 const ListPropertyRoute = ListPropertyRouteImport.update({
   id: '/list-property',
   path: '/list-property',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InvestRoute = InvestRouteImport.update({
+  id: '/invest',
+  path: '/invest',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HowItWorksRoute = HowItWorksRouteImport.update({
@@ -78,6 +84,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/invest': typeof InvestRoute
   '/list-property': typeof ListPropertyRoute
   '/matchmaker': typeof MatchmakerRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -90,6 +97,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/invest': typeof InvestRoute
   '/list-property': typeof ListPropertyRoute
   '/matchmaker': typeof MatchmakerRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -103,6 +111,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/invest': typeof InvestRoute
   '/list-property': typeof ListPropertyRoute
   '/matchmaker': typeof MatchmakerRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -117,6 +126,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/dashboard'
     | '/how-it-works'
+    | '/invest'
     | '/list-property'
     | '/matchmaker'
     | '/sitemap.xml'
@@ -129,6 +139,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/dashboard'
     | '/how-it-works'
+    | '/invest'
     | '/list-property'
     | '/matchmaker'
     | '/sitemap.xml'
@@ -141,6 +152,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/dashboard'
     | '/how-it-works'
+    | '/invest'
     | '/list-property'
     | '/matchmaker'
     | '/sitemap.xml'
@@ -154,6 +166,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   DashboardRoute: typeof DashboardRoute
   HowItWorksRoute: typeof HowItWorksRoute
+  InvestRoute: typeof InvestRoute
   ListPropertyRoute: typeof ListPropertyRoute
   MatchmakerRoute: typeof MatchmakerRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -181,6 +194,13 @@ declare module '@tanstack/react-router' {
       path: '/list-property'
       fullPath: '/list-property'
       preLoaderRoute: typeof ListPropertyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/invest': {
+      id: '/invest'
+      path: '/invest'
+      fullPath: '/invest'
+      preLoaderRoute: typeof InvestRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/how-it-works': {
@@ -242,6 +262,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   DashboardRoute: DashboardRoute,
   HowItWorksRoute: HowItWorksRoute,
+  InvestRoute: InvestRoute,
   ListPropertyRoute: ListPropertyRoute,
   MatchmakerRoute: MatchmakerRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
