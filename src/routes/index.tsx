@@ -236,7 +236,7 @@ function PathsSplit() {
       ],
       ctaLabel: "I Want to Invest",
       ctaIcon: TrendingUp,
-      note: "Estimates only. Returns are never guaranteed.",
+      note: "Estimated rental potential shown for informational purposes only. Professional review required.",
     },
     {
       key: "lifestyle",
@@ -250,7 +250,7 @@ function PathsSplit() {
       ],
       ctaLabel: "I Want to Live or Use the Property",
       ctaIcon: HomeIcon,
-      note: "Residency outcomes depend on Cypriot authorities — never guaranteed by Share B&B.",
+      note: "Residency eligibility is determined by Cypriot authorities. Speak with licensed legal and immigration professionals.",
     },
   ] as const;
 
@@ -341,9 +341,9 @@ function PathsSplit() {
           <p>
             <span className="text-white/75 font-medium">Important.</span> Share B&amp;B is
             a marketplace and matching platform. We do not provide legal, financial, tax,
-            investment, immigration, or real estate brokerage advice, and we do not
-            guarantee rental returns or residency approval. Please speak with a licensed
-            Cypriot lawyer, tax advisor, and immigration specialist before committing.
+            investment, immigration, or real estate brokerage advice. All estimates are
+            for informational purposes only. Users should consult licensed legal, tax,
+            financial, and immigration professionals before making decisions.
           </p>
         </div>
       </div>

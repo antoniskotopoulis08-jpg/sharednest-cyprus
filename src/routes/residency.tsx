@@ -225,9 +225,10 @@ function ResidencyPage() {
           <Disclaimer />
         </div>
         <p className="mt-4 text-xs text-muted-foreground/80 leading-relaxed max-w-3xl">
-          Share B&amp;B does not promise or guarantee residency approval, tax outcomes or
-          immigration eligibility. Requirements are set by Cyprus authorities and depend on your
-          personal situation. Always work with licensed legal and immigration professionals.
+          Residency eligibility, tax outcomes, and immigration status are determined by
+          Cyprus authorities and depend on each person's situation. Share B&amp;B does not
+          provide immigration, legal, or tax advice. Please speak with licensed legal and
+          immigration professionals before making decisions.
         </p>
       </section>
     </div>

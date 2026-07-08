@@ -16,7 +16,8 @@ export function SiteFooter() {
             <strong className="text-foreground">Disclaimer.</strong> Share B&amp;B is a
             marketplace and matching platform. We do not provide legal, financial, tax,
             investment, immigration, or real estate brokerage advice. All estimates are
-            informational only and professional review is required.
+            for informational purposes only. Users should consult licensed professionals
+            before making decisions.
           </p>
         </div>
         <div>
@@ -40,7 +41,7 @@ export function SiteFooter() {
       <div className="border-t border-border">
         <div className="container-page py-5 text-xs text-muted-foreground flex flex-col sm:flex-row gap-2 justify-between">
           <span>© {new Date().getFullYear()} Share B&amp;B. All rights reserved.</span>
-          <span>Marketplace only — not legal, financial or investment advice.</span>
+          <span>Marketplace &amp; matching platform — informational only, not advice.</span>
         </div>
       </div>
     </footer>
