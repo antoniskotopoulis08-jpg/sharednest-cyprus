@@ -64,7 +64,7 @@ function Contact() {
         </div>
         <aside className="space-y-4">
           <InfoRow icon={MapPin} title="Office" body="Limassol Marina, Cyprus" />
-          <InfoRow icon={Mail} title="Email" body="hello@sharebnb.cy" />
+          <InfoRow icon={Mail} title="Email" body="hello@sharednest.com" />
           <InfoRow icon={Phone} title="Phone" body="+357 25 000 000" />
           <Disclaimer />
         </aside>

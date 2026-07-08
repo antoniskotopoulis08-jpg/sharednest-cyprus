@@ -33,7 +33,7 @@ export function SiteFooter() {
           <div className="text-sm font-medium gold-underline">Contact</div>
           <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
             <li>Limassol, Cyprus</li>
-            <li>hello@sharebnb.cy</li>
+            <li>hello@sharednest.com</li>
             <li><Link to="/contact" className="hover:text-foreground">Contact us</Link></li>
           </ul>
         </div>
