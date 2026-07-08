@@ -1,7 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { formatEUR } from "@/lib/properties";
-import { Sparkles, Users, ArrowRight, ArrowLeft, Check, MapPin, Home, Calendar, Heart, PieChart, TrendingUp, User } from "lucide-react";
+import {
+  Sparkles, Users, ArrowRight, ArrowLeft, Check, MapPin, Home, TrendingUp,
+  PieChart, User, Target, Briefcase, Waves, ScrollText, Rocket,
+} from "lucide-react";
 import { Disclaimer } from "@/components/disclaimer";
 import { CountUp } from "@/components/count-up";
 
@@ -11,78 +14,307 @@ export const Route = createFileRoute("/matchmaker")({
       { title: "AI Co-Buyer Matchmaker — Share B&B" },
       { name: "description", content: "Take the Share B&B AI quiz — get matched with compatible co-buyers and Cyprus properties." },
       { property: "og:title", content: "AI Co-Buyer Matchmaker" },
-      { property: "og:description", content: "Answer 8 questions and receive an AI compatibility profile." },
+      { property: "og:description", content: "Answer a few questions and receive an AI compatibility profile." },
     ],
   }),
   component: Matchmaker,
 });
 
-const CYPRUS_AREAS = ["Limassol", "Paphos", "Larnaca", "Nicosia", "Ayia Napa", "Troodos"];
-const PURPOSES = ["Living", "Holiday home", "Rental income", "Long-term investment", "Retirement", "Digital nomad base"];
-const USAGE_FREQ = ["Every weekend", "Monthly", "A few times a year", "Seasonal (1–3 months)", "Rarely — mostly rental"];
-const COBUYER_TYPES = ["Quiet", "Family-friendly", "Investor-focused", "Flexible", "Luxury-focused"];
-const SHARE_SIZES = [10, 20, 25, 50];
+/* ─────────────  Data  ───────────── */
+
+const GOALS = [
+  { id: "invest",     label: "Invest in property",           icon: TrendingUp, track: "invest"   },
+  { id: "live",       label: "Live in Cyprus",               icon: Home,       track: "residency"},
+  { id: "holiday",    label: "Holiday home",                 icon: Waves,      track: "residency"},
+  { id: "retire",     label: "Retirement base",              icon: User,       track: "residency"},
+  { id: "nomad",      label: "Digital nomad base",           icon: Rocket,     track: "residency"},
+  { id: "mixed",      label: "Mixed investment + personal use", icon: PieChart, track: "invest"  },
+] as const;
+
+type GoalId = (typeof GOALS)[number]["id"];
+type Track = "invest" | "residency";
+
+const AREAS = ["Limassol", "Paphos", "Larnaca", "Nicosia", "Ayia Napa", "Troodos"];
+
+const RETURN_PROFILES = ["Steady income", "Balanced growth + income", "Capital growth focused"];
+const RISK_LEVELS = ["Low", "Medium", "High"];
+const STRATEGY = ["Short-term (2–4 yrs)", "Medium (5–8 yrs)", "Long-term (10+ yrs)"];
+
+const LIFESTYLES = ["Quiet & coastal", "Vibrant city", "Village charm", "Mountain / nature"];
+const FAMILY_NEEDS = ["Solo / couple", "Young family", "Teens", "Retirees", "Multi-generational"];
+const PROXIMITY = ["International school", "City centre / work", "Beach", "Airport"];
+const GEO_PREF = ["Beach", "City", "Mountain", "Mixed"];
+const IMMIGRATION = ["Yes, please", "Maybe — not sure yet", "No, I'm all set"];
+
+const SHARE_SIZES = [12.5, 25, 50];
+
+/* ─────────────  Answers state  ───────────── */
 
 type Answers = {
+  goal: GoalId | "";
+  // shared
   budget: number;
-  areas: string[];
-  purpose: string;
-  usage: string;
-  cobuyer: string;
   share: number;
-  rental: number;
-  personal: number;
+  location: string;
+  // invest
+  returnProfile: string;
+  rentalImportance: number; // 0-10
+  risk: string;
+  strategy: string;
+  // residency
+  lifestyle: string;
+  family: string;
+  proximity: string;
+  geo: string;
+  monthsUse: number; // 1-12
+  needImmigration: string;
 };
 
 const INITIAL: Answers = {
-  budget: 150_000,
-  areas: [],
-  purpose: "",
-  usage: "",
-  cobuyer: "",
+  goal: "",
+  budget: 180_000,
   share: 25,
-  rental: 5,
-  personal: 5,
+  location: "",
+  returnProfile: "",
+  rentalImportance: 6,
+  risk: "",
+  strategy: "",
+  lifestyle: "",
+  family: "",
+  proximity: "",
+  geo: "",
+  monthsUse: 3,
+  needImmigration: "",
 };
 
+/* ─────────────  Component  ───────────── */
+
 function Matchmaker() {
-  const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Answers>(INITIAL);
+  const [step, setStep] = useState(0);
   const [done, setDone] = useState(false);
 
-  const steps = [
-    { key: "budget", label: "Budget", icon: PieChart },
-    { key: "areas", label: "Areas", icon: MapPin },
-    { key: "purpose", label: "Purpose", icon: Home },
-    { key: "usage", label: "Usage", icon: Calendar },
-    { key: "cobuyer", label: "Co-owner", icon: Users },
-    { key: "share", label: "Share size", icon: PieChart },
-    { key: "rental", label: "Rental", icon: TrendingUp },
-    { key: "personal", label: "Personal", icon: Heart },
-  ];
+  const track: Track | null = useMemo(() => {
+    if (!answers.goal) return null;
+    return GOALS.find((g) => g.id === answers.goal)!.track;
+  }, [answers.goal]);
 
-  const total = steps.length;
-  const progress = ((step + (done ? 1 : 0)) / total) * 100;
+  const flow = useMemo<{ key: string; title: string; hint?: string; render: () => React.ReactNode; complete: boolean }[]>(() => {
+    const set = <K extends keyof Answers>(k: K, v: Answers[K]) => setAnswers((a) => ({ ...a, [k]: v }));
 
-  const canAdvance = () => {
-    switch (step) {
-      case 0: return answers.budget > 0;
-      case 1: return answers.areas.length > 0;
-      case 2: return !!answers.purpose;
-      case 3: return !!answers.usage;
-      case 4: return !!answers.cobuyer;
-      case 5: return !!answers.share;
-      default: return true;
+    const goalStep = {
+      key: "goal",
+      title: "What is your main goal?",
+      hint: "Pick the closest fit — we'll customise the rest of the quiz around it.",
+      complete: !!answers.goal,
+      render: () => (
+        <div className="mt-6 grid gap-3 sm:grid-cols-2">
+          {GOALS.map((g) => {
+            const on = answers.goal === g.id;
+            const Icon = g.icon;
+            return (
+              <button
+                key={g.id}
+                type="button"
+                onClick={() => set("goal", g.id)}
+                className={`flex items-start gap-3 rounded-xl border p-4 text-left transition ${
+                  on ? "border-gold bg-gold/10" : "border-border hover:border-gold/60"
+                }`}
+              >
+                <span
+                  className="grid h-10 w-10 place-items-center rounded-lg text-[color:var(--gold-foreground)] shrink-0"
+                  style={{ background: "var(--gradient-gold)" }}
+                >
+                  <Icon className="h-4 w-4" />
+                </span>
+                <span className="min-w-0">
+                  <span className="font-serif text-lg leading-tight block">{g.label}</span>
+                  <span className="text-xs text-muted-foreground">
+                    {g.track === "invest" ? "Investment track" : "Residency / lifestyle track"}
+                  </span>
+                </span>
+                {on && <Check className="h-4 w-4 text-gold ml-auto shrink-0" />}
+              </button>
+            );
+          })}
+        </div>
+      ),
+    };
+
+    const budgetStep = {
+      key: "budget",
+      title: "What is your desired budget?",
+      hint: "Comfortable maximum you'd allocate to your share.",
+      complete: answers.budget > 0,
+      render: () => (
+        <div className="mt-4">
+          <div className="font-serif text-5xl text-gold">{formatEUR(answers.budget)}</div>
+          <input
+            type="range" min={40_000} max={800_000} step={10_000}
+            value={answers.budget}
+            onChange={(e) => set("budget", Number(e.target.value))}
+            className="mt-6 w-full accent-[color:var(--gold)]"
+          />
+          <div className="mt-2 flex justify-between text-xs text-muted-foreground">
+            <span>€40k</span><span>€800k</span>
+          </div>
+        </div>
+      ),
+    };
+
+    const locationStep = {
+      key: "location",
+      title: "Preferred Cyprus location",
+      hint: "Pick your top choice — we'll surface alternatives too.",
+      complete: !!answers.location,
+      render: () => <ChoiceGrid options={AREAS} value={answers.location} onChange={(v) => set("location", v)} cols={3} />,
+    };
+
+    const shareStep = {
+      key: "share",
+      title: "Desired ownership percentage",
+      hint: "Larger shares = higher access & upside, higher upfront cost.",
+      complete: !!answers.share,
+      render: () => (
+        <div className="mt-6 grid grid-cols-3 gap-3">
+          {SHARE_SIZES.map((s) => {
+            const on = answers.share === s;
+            return (
+              <button
+                key={s}
+                type="button"
+                onClick={() => set("share", s)}
+                className={`rounded-xl border px-4 py-6 text-center transition ${
+                  on ? "border-gold bg-gold/10" : "border-border hover:border-gold/60"
+                }`}
+              >
+                <div className="font-serif text-3xl text-gold">{s}%</div>
+                <div className="text-xs text-muted-foreground mt-1">
+                  ≈ {formatEUR(Math.round((answers.budget * s) / 25))}
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      ),
+    };
+
+    if (track === "invest") {
+      return [
+        goalStep,
+        budgetStep,
+        {
+          key: "returnProfile",
+          title: "Preferred return profile",
+          complete: !!answers.returnProfile,
+          render: () => <ChoiceGrid options={RETURN_PROFILES} value={answers.returnProfile} onChange={(v) => set("returnProfile", v)} />,
+        },
+        {
+          key: "rentalImportance",
+          title: "How important is rental income?",
+          complete: true,
+          render: () => <ImportanceSlider value={answers.rentalImportance} onChange={(v) => set("rentalImportance", v)} />,
+        },
+        {
+          key: "risk",
+          title: "Risk tolerance",
+          complete: !!answers.risk,
+          render: () => <ChoiceGrid options={RISK_LEVELS} value={answers.risk} onChange={(v) => set("risk", v)} cols={3} />,
+        },
+        locationStep,
+        {
+          key: "strategy",
+          title: "Short-term or long-term strategy?",
+          complete: !!answers.strategy,
+          render: () => <ChoiceGrid options={STRATEGY} value={answers.strategy} onChange={(v) => set("strategy", v)} cols={3} />,
+        },
+        shareStep,
+      ];
     }
-  };
+
+    if (track === "residency") {
+      return [
+        goalStep,
+        {
+          key: "lifestyle",
+          title: "Preferred lifestyle",
+          complete: !!answers.lifestyle,
+          render: () => <ChoiceGrid options={LIFESTYLES} value={answers.lifestyle} onChange={(v) => set("lifestyle", v)} />,
+        },
+        {
+          key: "family",
+          title: "Family needs",
+          complete: !!answers.family,
+          render: () => <ChoiceGrid options={FAMILY_NEEDS} value={answers.family} onChange={(v) => set("family", v)} />,
+        },
+        {
+          key: "proximity",
+          title: "School or work proximity",
+          hint: "What should be nearby?",
+          complete: !!answers.proximity,
+          render: () => <ChoiceGrid options={PROXIMITY} value={answers.proximity} onChange={(v) => set("proximity", v)} />,
+        },
+        {
+          key: "geo",
+          title: "Beach, city, or mountain?",
+          complete: !!answers.geo,
+          render: () => <ChoiceGrid options={GEO_PREF} value={answers.geo} onChange={(v) => set("geo", v)} cols={4} />,
+        },
+        {
+          key: "monthsUse",
+          title: "How many months per year do you want to use the property?",
+          complete: true,
+          render: () => (
+            <div className="mt-6">
+              <div className="flex items-baseline justify-between">
+                <div className="font-serif text-4xl text-gold">
+                  {answers.monthsUse}
+                  <span className="text-xl text-muted-foreground"> / 12 months</span>
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  {answers.monthsUse >= 9 ? "Primary home" : answers.monthsUse >= 4 ? "Seasonal base" : "Short visits"}
+                </div>
+              </div>
+              <input
+                type="range" min={1} max={12} step={1} value={answers.monthsUse}
+                onChange={(e) => set("monthsUse", Number(e.target.value))}
+                className="mt-6 w-full accent-[color:var(--gold)]"
+              />
+              <div className="mt-2 flex justify-between text-xs text-muted-foreground">
+                <span>1 month</span><span>Year-round</span>
+              </div>
+            </div>
+          ),
+        },
+        shareStep,
+        {
+          key: "needImmigration",
+          title: "Do you need legal or immigration guidance?",
+          hint: "We'll flag independent Cypriot specialists — we don't advise ourselves.",
+          complete: !!answers.needImmigration,
+          render: () => <ChoiceGrid options={IMMIGRATION} value={answers.needImmigration} onChange={(v) => set("needImmigration", v)} cols={3} />,
+        },
+      ];
+    }
+
+    return [goalStep];
+  }, [answers, track]);
+
+  const total = flow.length;
+  const current = flow[Math.min(step, total - 1)];
+  const progress = ((step + (done ? 1 : 0)) / total) * 100;
 
   const next = () => {
     if (step < total - 1) setStep(step + 1);
     else setDone(true);
   };
   const back = () => (done ? setDone(false) : step > 0 && setStep(step - 1));
-
   const restart = () => { setAnswers(INITIAL); setStep(0); setDone(false); };
+
+  // If goal changes and step is beyond new flow, clamp
+  useEffect(() => {
+    if (step > total - 1) setStep(0);
+  }, [total, step]);
 
   return (
     <div className="container-page py-16">
@@ -90,148 +322,40 @@ function Matchmaker() {
         <div className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-gold">
           <Sparkles className="h-3.5 w-3.5" /> AI Matchmaker
         </div>
-        <h1 className="mt-2 font-serif text-4xl md:text-5xl">Meet your ideal co-buyers.</h1>
+        <h1 className="mt-2 font-serif text-4xl md:text-5xl">Find your Cyprus fit.</h1>
         <p className="mt-4 text-muted-foreground">
-          Answer 8 short questions. Our AI generates a compatibility profile and matches
-          you with properties and co-buyers across Cyprus.
+          Start with your main goal — the quiz then adapts to either an investment path
+          or a residency & lifestyle path.
         </p>
       </div>
 
       {!done ? (
         <div className="mt-10 rounded-2xl border border-border bg-card overflow-hidden">
-          {/* Progress */}
           <div className="border-b border-border p-6">
             <div className="flex items-center justify-between text-xs text-muted-foreground mb-3">
-              <span>Step {step + 1} of {total} · {steps[step].label}</span>
+              <span className="inline-flex items-center gap-2">
+                <Target className="h-3.5 w-3.5 text-gold" />
+                Step {step + 1} of {total}
+                {track && (
+                  <span className="ml-2 rounded-full border border-border px-2 py-0.5 text-[10px] uppercase tracking-widest">
+                    {track === "invest" ? "Investment track" : "Residency track"}
+                  </span>
+                )}
+              </span>
               <span>{Math.round(progress)}%</span>
             </div>
             <div className="h-1.5 w-full rounded-full bg-muted overflow-hidden">
               <div
-                className="h-full bg-gold transition-all duration-500 ease-out"
-                style={{ width: `${progress}%` }}
+                className="h-full transition-all duration-500 ease-out"
+                style={{ width: `${progress}%`, background: "var(--gradient-gold)" }}
               />
             </div>
-            <div className="mt-4 hidden md:flex items-center gap-1">
-              {steps.map((s, i) => {
-                const Icon = s.icon;
-                const active = i === step;
-                const complete = i < step;
-                return (
-                  <div key={s.key} className="flex-1 flex items-center gap-1">
-                    <div className={`flex items-center gap-1.5 px-2 py-1 rounded-full text-[11px] transition ${
-                      active ? "bg-gold/15 text-gold" : complete ? "text-foreground" : "text-muted-foreground/60"
-                    }`}>
-                      <Icon className="h-3 w-3" />
-                      <span className="hidden lg:inline">{s.label}</span>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
           </div>
 
-          {/* Step content */}
-          <div key={step} className="p-6 md:p-10 animate-fade-in min-h-[320px]">
-            {step === 0 && (
-              <StepShell title="What is your total budget?" hint="Move the slider to your comfortable maximum.">
-                <div className="mt-4">
-                  <div className="font-serif text-5xl text-gold">{formatEUR(answers.budget)}</div>
-                  <input
-                    type="range" min={40_000} max={800_000} step={10_000}
-                    value={answers.budget}
-                    onChange={(e) => setAnswers({ ...answers, budget: Number(e.target.value) })}
-                    className="mt-6 w-full accent-[color:var(--gold)]"
-                  />
-                  <div className="mt-2 flex justify-between text-xs text-muted-foreground">
-                    <span>€40k</span><span>€800k</span>
-                  </div>
-                </div>
-              </StepShell>
-            )}
-
-            {step === 1 && (
-              <StepShell title="Which Cyprus areas interest you?" hint="Pick one or more.">
-                <div className="mt-6 grid grid-cols-2 md:grid-cols-3 gap-3">
-                  {CYPRUS_AREAS.map((a) => {
-                    const on = answers.areas.includes(a);
-                    return (
-                      <button
-                        key={a}
-                        type="button"
-                        onClick={() => setAnswers({
-                          ...answers,
-                          areas: on ? answers.areas.filter(x => x !== a) : [...answers.areas, a],
-                        })}
-                        className={`rounded-lg border px-4 py-3 text-left text-sm transition ${
-                          on ? "border-gold bg-gold/10 text-foreground" : "border-border hover:border-gold/60"
-                        }`}
-                      >
-                        <div className="flex items-center justify-between">
-                          <span>{a}</span>
-                          {on && <Check className="h-4 w-4 text-gold" />}
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-              </StepShell>
-            )}
-
-            {step === 2 && (
-              <StepShell title="What is your purpose?" hint="Pick the closest fit.">
-                <ChoiceGrid options={PURPOSES} value={answers.purpose} onChange={(v) => setAnswers({ ...answers, purpose: v })} />
-              </StepShell>
-            )}
-
-            {step === 3 && (
-              <StepShell title="How often do you want to use the property?">
-                <ChoiceGrid options={USAGE_FREQ} value={answers.usage} onChange={(v) => setAnswers({ ...answers, usage: v })} />
-              </StepShell>
-            )}
-
-            {step === 4 && (
-              <StepShell title="What type of co-owner do you prefer?">
-                <ChoiceGrid options={COBUYER_TYPES} value={answers.cobuyer} onChange={(v) => setAnswers({ ...answers, cobuyer: v })} />
-              </StepShell>
-            )}
-
-            {step === 5 && (
-              <StepShell title="What share size are you interested in?" hint="A share is a percentage of ownership.">
-                <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-3">
-                  {SHARE_SIZES.map((s) => {
-                    const on = answers.share === s;
-                    return (
-                      <button
-                        key={s}
-                        type="button"
-                        onClick={() => setAnswers({ ...answers, share: s })}
-                        className={`rounded-xl border px-4 py-6 text-center transition ${
-                          on ? "border-gold bg-gold/10" : "border-border hover:border-gold/60"
-                        }`}
-                      >
-                        <div className="font-serif text-3xl text-gold">{s}%</div>
-                        <div className="text-xs text-muted-foreground mt-1">≈ {formatEUR(answers.budget * (s / 25))}</div>
-                      </button>
-                    );
-                  })}
-                </div>
-              </StepShell>
-            )}
-
-            {step === 6 && (
-              <StepShell title="How important is rental potential?">
-                <ImportanceSlider value={answers.rental} onChange={(v) => setAnswers({ ...answers, rental: v })} />
-              </StepShell>
-            )}
-
-            {step === 7 && (
-              <StepShell title="How important is personal use?">
-                <ImportanceSlider value={answers.personal} onChange={(v) => setAnswers({ ...answers, personal: v })} />
-              </StepShell>
-            )}
+          <div key={current.key} className="p-6 md:p-10 animate-fade-in min-h-[320px]">
+            <StepShell title={current.title} hint={current.hint}>{current.render()}</StepShell>
           </div>
 
-          {/* Nav */}
           <div className="border-t border-border p-6 flex items-center justify-between">
             <button
               type="button"
@@ -244,15 +368,16 @@ function Matchmaker() {
             <button
               type="button"
               onClick={next}
-              disabled={!canAdvance()}
-              className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-40"
+              disabled={!current.complete}
+              className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-[color:var(--gold-foreground)] disabled:opacity-40"
+              style={{ background: "var(--gradient-gold)" }}
             >
               {step === total - 1 ? "Generate AI match" : "Continue"} <ArrowRight className="h-4 w-4" />
             </button>
           </div>
         </div>
       ) : (
-        <ResultDashboard answers={answers} onRestart={restart} />
+        <ResultDashboard answers={answers} track={track!} onRestart={restart} />
       )}
 
       <div className="mt-10">
@@ -261,6 +386,8 @@ function Matchmaker() {
     </div>
   );
 }
+
+/* ─────────────  Steps UI  ───────────── */
 
 function StepShell({ title, hint, children }: { title: string; hint?: string; children: React.ReactNode }) {
   return (
@@ -272,9 +399,13 @@ function StepShell({ title, hint, children }: { title: string; hint?: string; ch
   );
 }
 
-function ChoiceGrid({ options, value, onChange }: { options: string[]; value: string; onChange: (v: string) => void }) {
+function ChoiceGrid({
+  options, value, onChange, cols = 2,
+}: { options: readonly string[]; value: string; onChange: (v: string) => void; cols?: 2 | 3 | 4 }) {
+  const gridCls =
+    cols === 4 ? "sm:grid-cols-4" : cols === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2";
   return (
-    <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-3">
+    <div className={`mt-6 grid grid-cols-1 ${gridCls} gap-3`}>
       {options.map((o) => {
         const on = value === o;
         return (
@@ -311,85 +442,139 @@ function ImportanceSlider({ value, onChange }: { value: number; onChange: (v: nu
         onChange={(e) => onChange(Number(e.target.value))}
         className="mt-6 w-full accent-[color:var(--gold)]"
       />
-      <div className="mt-2 flex justify-between text-xs text-muted-foreground">
-        <span>0</span><span>10</span>
-      </div>
     </div>
   );
 }
 
-/* ---------- RESULT ---------- */
+/* ─────────────  Result  ───────────── */
 
-function ResultDashboard({ answers, onRestart }: { answers: Answers; onRestart: () => void }) {
+function ResultDashboard({
+  answers, track, onRestart,
+}: { answers: Answers; track: Track; onRestart: () => void }) {
   const [loaded, setLoaded] = useState(false);
-  useEffect(() => {
-    const t = setTimeout(() => setLoaded(true), 400);
-    return () => clearTimeout(t);
-  }, []);
+  useEffect(() => { const t = setTimeout(() => setLoaded(true), 400); return () => clearTimeout(t); }, []);
 
-  const score = 87;
-  const traits = [
-    { label: "Budget alignment", value: 92 },
-    { label: "Area demand", value: 84 },
-    { label: "Usage compatibility", value: 89 },
-    { label: "Co-buyer overlap", value: 83 },
-  ];
+  // Mock scoring — deterministic from inputs
+  const rec = useMemo(() => {
+    const coastal = ["Limassol", "Paphos", "Larnaca", "Ayia Napa"].includes(answers.location);
+    const wantsRental = answers.rentalImportance >= 6 || answers.returnProfile === "Steady income";
+
+    // Investment suitability
+    let inv = 55;
+    if (track === "invest") inv += 20;
+    inv += Math.min(20, answers.rentalImportance * 2);
+    if (answers.risk === "High") inv += 6; else if (answers.risk === "Medium") inv += 3;
+    if (answers.strategy?.startsWith("Long")) inv += 4;
+    if (coastal) inv += 4;
+    inv = Math.max(40, Math.min(97, inv));
+
+    // Residency suitability
+    let res = 55;
+    if (track === "residency") res += 20;
+    if (answers.monthsUse >= 6) res += 12;
+    else if (answers.monthsUse >= 3) res += 6;
+    if (answers.family === "Young family" || answers.family === "Multi-generational") res += 4;
+    if (answers.geo === "Beach" && coastal) res += 5;
+    res = Math.max(40, Math.min(97, res));
+
+    const overall = Math.round((inv + res) / 2);
+
+    // Best property type + location
+    let bestType = "Coastal apartment";
+    if (track === "invest" && wantsRental) bestType = "Short-let seafront apartment";
+    else if (track === "invest") bestType = "Modern city apartment";
+    else if (answers.family === "Young family") bestType = "Family villa with garden";
+    else if (answers.geo === "Mountain") bestType = "Stone village house";
+    else if (answers.monthsUse >= 6) bestType = "Full-service townhouse";
+    else bestType = "Holiday villa";
+
+    let bestLocation = answers.location || (track === "invest" ? "Limassol" : "Paphos");
+    if (!answers.location && answers.geo === "Mountain") bestLocation = "Troodos hills";
+    if (!answers.location && answers.geo === "City") bestLocation = "Nicosia";
+
+    // Ideal co-buyer profile
+    let coBuyer = "Foreign holiday-home buyer + local professional";
+    if (track === "invest" && answers.strategy?.startsWith("Long")) coBuyer = "Long-horizon investor + rental-focused co-owner";
+    else if (track === "invest") coBuyer = "Yield-focused investors sharing seasonal rental income";
+    else if (answers.family === "Retirees") coBuyer = "Fellow retirees splitting a quiet seasonal home";
+    else if (answers.family === "Young family") coBuyer = "Second family sharing school-holiday windows";
+    else if (track === "residency" && answers.monthsUse >= 8) coBuyer = "One or two silent investor co-owners";
+
+    // Next step
+    const nextStep = track === "invest"
+      ? "Shortlist investment-grade shares matching your risk profile"
+      : "Preview lifestyle-fit homes with your personal-use calendar";
+
+    return {
+      inv, res, overall,
+      bestType, bestLocation,
+      share: answers.share,
+      approxCost: Math.round((answers.budget * answers.share) / 25),
+      coBuyer, nextStep,
+    };
+  }, [answers, track]);
 
   return (
     <div className="mt-10 animate-fade-in">
-      {/* Hero card */}
       <div className="relative overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-card via-card to-muted/40 p-8 md:p-12">
         <div className="absolute -top-16 -right-16 h-64 w-64 rounded-full bg-gold/20 blur-3xl" />
         <div className="absolute -bottom-24 -left-16 h-72 w-72 rounded-full bg-primary/20 blur-3xl" />
 
         <div className="relative grid gap-10 md:grid-cols-[auto_1fr] items-center">
-          <BigScoreRing score={score} animate={loaded} />
+          <BigScoreRing score={rec.overall} animate={loaded} />
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-3 py-1 text-xs text-gold">
-              <Sparkles className="h-3.5 w-3.5" /> AI compatibility profile
+              <Sparkles className="h-3.5 w-3.5" /> Personalised AI profile
             </div>
-            <h2 className="mt-4 font-serif text-3xl md:text-4xl">You're a strong match.</h2>
+            <h2 className="mt-4 font-serif text-3xl md:text-4xl">
+              You look best suited to a{" "}
+              <span className="text-gold">{track === "invest" ? "share investment" : "residency-first"}</span> path.
+            </h2>
             <p className="mt-3 text-muted-foreground max-w-xl">
-              Based on your budget of {formatEUR(answers.budget)}, {answers.areas.length} preferred area
-              {answers.areas.length === 1 ? "" : "s"}, and a "{answers.cobuyer.toLowerCase() || "flexible"}" co-owner style, our model rates your co-buying compatibility at <span className="text-foreground font-medium">{score}%</span>.
+              Based on your goal, budget of {formatEUR(answers.budget)} and a preferred{" "}
+              {answers.share}% share, our mock model rates your overall compatibility at{" "}
+              <span className="text-foreground font-medium">{rec.overall}%</span>.
             </p>
           </div>
         </div>
 
-        {/* Trait bars */}
         <div className="relative mt-10 grid gap-4 md:grid-cols-2">
-          {traits.map((t, i) => (
-            <TraitBar key={t.label} label={t.label} value={t.value} delay={i * 120} animate={loaded} />
-          ))}
+          <TraitBar label="Investment suitability" value={rec.inv} delay={0} animate={loaded} />
+          <TraitBar label="Residency / personal-use suitability" value={rec.res} delay={140} animate={loaded} />
         </div>
       </div>
 
-      {/* Cards */}
-      <div className="mt-6 grid gap-6 md:grid-cols-3">
-        <ResultCard icon={Home} label="Best property type" value="Paphos holiday villa" sub="Coastal, high seasonal demand" />
-        <ResultCard icon={PieChart} label="Suggested share" value="25%" sub={`≈ ${formatEUR(400_000 * 0.25)} co-invest`} />
-        <ResultCard icon={User} label="Ideal co-buyer profile" value="Foreign holiday-home buyer + local professional" sub="Mixed personal use & rental" />
+      <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <ResultCard icon={Home} label="Best property type" value={rec.bestType} sub="Matched to your lifestyle & horizon" />
+        <ResultCard icon={MapPin} label="Best Cyprus location" value={rec.bestLocation} sub="Aligned with your preferences" />
+        <ResultCard icon={PieChart} label="Suggested share" value={`${rec.share}%`} sub={`≈ ${formatEUR(rec.approxCost)} co-invest`} />
+        <ResultCard icon={Users} label="Compatible co-buyer profile" value={rec.coBuyer} sub="Illustrative — real matches shown after signup" />
       </div>
 
-      {/* Next step */}
       <div className="mt-6 rounded-2xl border border-gold/40 bg-gold/5 p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div>
-          <div className="text-xs uppercase tracking-widest text-gold">Recommended next step</div>
-          <div className="mt-2 font-serif text-2xl">View your matched properties</div>
-          <p className="mt-1 text-sm text-muted-foreground max-w-lg">
-            We'll shortlist verified Paphos villas in your budget with co-buyer slots open.
-          </p>
+          <div className="text-xs uppercase tracking-widest text-gold inline-flex items-center gap-2">
+            <Briefcase className="h-3.5 w-3.5" /> Recommended next step
+          </div>
+          <div className="mt-2 font-serif text-2xl">{rec.nextStep}</div>
+          {track === "residency" && answers.needImmigration === "Yes, please" && (
+            <p className="mt-2 text-sm text-muted-foreground max-w-lg inline-flex items-start gap-2">
+              <ScrollText className="h-4 w-4 mt-0.5 text-gold shrink-0" />
+              We'll also share a list of independent Cypriot immigration specialists you can contact.
+            </p>
+          )}
         </div>
         <div className="flex flex-wrap gap-3">
           <Link
             to="/browse"
-            className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+            className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-medium text-[color:var(--gold-foreground)]"
+            style={{ background: "var(--gradient-gold)" }}
           >
             View matched properties <ArrowRight className="h-4 w-4" />
           </Link>
           <button
             onClick={onRestart}
-            className="inline-flex items-center gap-2 rounded-md border border-border px-5 py-3 text-sm hover:border-gold/60"
+            className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm hover:border-gold/60"
           >
             Retake quiz
           </button>
@@ -399,13 +584,15 @@ function ResultDashboard({ answers, onRestart }: { answers: Answers; onRestart: 
   );
 }
 
-function ResultCard({ icon: Icon, label, value, sub }: { icon: any; label: string; value: string; sub: string }) {
+function ResultCard({
+  icon: Icon, label, value, sub,
+}: { icon: React.ComponentType<{ className?: string }>; label: string; value: string; sub: string }) {
   return (
     <div className="rounded-2xl border border-border bg-card p-6 hover:border-gold/40 transition">
       <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground">
         <Icon className="h-4 w-4 text-gold" /> {label}
       </div>
-      <div className="mt-3 font-serif text-xl leading-snug">{value}</div>
+      <div className="mt-3 font-serif text-lg leading-snug">{value}</div>
       <div className="mt-2 text-xs text-muted-foreground">{sub}</div>
     </div>
   );
@@ -426,8 +613,12 @@ function TraitBar({ label, value, delay, animate }: { label: string; value: numb
       </div>
       <div className="mt-2 h-1.5 rounded-full bg-muted overflow-hidden">
         <div
-          className="h-full bg-gradient-to-r from-gold via-gold to-primary"
-          style={{ width: `${w}%`, transition: "width 1100ms cubic-bezier(0.2,0.8,0.2,1)" }}
+          className="h-full"
+          style={{
+            width: `${w}%`,
+            background: "var(--gradient-gold)",
+            transition: "width 1100ms cubic-bezier(0.2,0.8,0.2,1)",
+          }}
         />
       </div>
     </div>
