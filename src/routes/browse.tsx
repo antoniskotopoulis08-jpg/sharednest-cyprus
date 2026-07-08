@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { properties, cities, propertyTypes, uses, formatEUR } from "@/lib/properties";
-import { PropertyCard } from "@/components/property-card";
+import { LuxeShareCard, propertyToLuxe } from "@/components/luxe-share-card";
 import { Search } from "lucide-react";
 
 export const Route = createFileRoute("/browse")({
