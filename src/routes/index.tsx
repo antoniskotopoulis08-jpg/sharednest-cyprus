@@ -203,6 +203,136 @@ function Hero() {
   );
 }
 
+/* ─────────────────────  1b. TWO PATHS SPLIT  ───────────────────── */
+function PathsSplit() {
+  const paths = [
+    {
+      key: "invest",
+      eyebrow: "Path 01 — Invest in a property share",
+      title: "Invest in a Property Share",
+      copy: "Explore co-ownership opportunities with estimated rental potential, transparent costs, and AI-powered property matching.",
+      bullets: [
+        "Lower entry cost than buying a full property",
+        "Estimated rental potential, transparent monthly costs",
+        "AI-powered matching by budget, city and horizon",
+      ],
+      ctaLabel: "I Want to Invest",
+      ctaIcon: TrendingUp,
+      note: "Estimates only. Returns are never guaranteed.",
+    },
+    {
+      key: "lifestyle",
+      eyebrow: "Path 02 — Buy for residency or personal use",
+      title: "Buy for Residency or Personal Use",
+      copy: "Find homes that fit your lifestyle, family needs, location preferences, and long-term plans in Cyprus.",
+      bullets: [
+        "Holiday home, retirement base, or digital nomad hub",
+        "Personal-use calendar co-managed with your co-owners",
+        "Location, lifestyle and family-fit matching",
+      ],
+      ctaLabel: "I Want to Live or Use the Property",
+      ctaIcon: HomeIcon,
+      note: "Residency outcomes depend on Cypriot authorities — never guaranteed by Share B&B.",
+    },
+  ] as const;
+
+  return (
+    <section className="relative bg-[oklch(0.09_0.03_250)] text-white overflow-hidden">
+      <div
+        className="absolute inset-0 pointer-events-none opacity-60"
+        style={{
+          background:
+            "radial-gradient(700px 400px at 20% 0%, oklch(0.28 0.08 245 / 0.35), transparent 60%), radial-gradient(700px 400px at 90% 100%, oklch(0.35 0.09 60 / 0.18), transparent 60%)",
+        }}
+      />
+      <div className="relative container-page py-20 md:py-24">
+        <div className="max-w-2xl">
+          <div className="text-[10px] uppercase tracking-[0.3em] text-[color:var(--gold)] font-mono">
+            Two paths · one marketplace
+          </div>
+          <h2 className="mt-4 font-serif text-4xl md:text-5xl leading-[1.05]">
+            Choose how you want to own in Cyprus.
+          </h2>
+          <p className="mt-4 text-white/60 max-w-xl">
+            Share B&amp;B matches two very different buyers to the right kind of home.
+            Pick the path that fits — or explore both.
+          </p>
+        </div>
+
+        <div className="mt-12 grid gap-6 lg:grid-cols-2">
+          {paths.map((p, i) => {
+            const Icon = p.ctaIcon;
+            return (
+              <div
+                key={p.key}
+                className="group relative rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur p-7 md:p-9 transition-all duration-500 hover:border-[color:var(--gold)]/40 hover:-translate-y-1 animate-reveal"
+                style={{ animationDelay: `${i * 120}ms` }}
+              >
+                <div
+                  className="pointer-events-none absolute -top-24 -right-16 h-72 w-72 rounded-full opacity-20 blur-3xl transition-opacity duration-500 group-hover:opacity-40"
+                  style={{ background: "var(--gradient-gold)" }}
+                />
+                <div className="relative">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-[10px] font-mono uppercase tracking-[0.25em] text-white/60">
+                    <Icon className="h-3 w-3 text-[color:var(--gold)]" />
+                    {p.eyebrow}
+                  </div>
+                  <h3 className="mt-6 font-serif text-3xl md:text-4xl leading-tight">
+                    {p.title}
+                  </h3>
+                  <p className="mt-4 text-white/70 leading-relaxed">{p.copy}</p>
+
+                  <ul className="mt-6 space-y-2.5">
+                    {p.bullets.map((b) => (
+                      <li key={b} className="flex items-start gap-3 text-sm text-white/75">
+                        <span
+                          className="mt-2 h-1.5 w-1.5 rounded-full shrink-0"
+                          style={{ background: "var(--gradient-gold)" }}
+                        />
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-8 flex flex-wrap items-center gap-4">
+                    <Link
+                      to="/browse"
+                      className="group/btn inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-medium text-[color:var(--gold-foreground)]"
+                      style={{ background: "var(--gradient-gold)" }}
+                    >
+                      {p.ctaLabel}
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+                    </Link>
+                    <Link
+                      to="/matchmaker"
+                      className="text-xs text-white/60 hover:text-white underline underline-offset-4"
+                    >
+                      Take the AI Match Quiz
+                    </Link>
+                  </div>
+
+                  <div className="mt-6 text-[11px] text-white/45 italic">{p.note}</div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="mt-10 rounded-xl border border-white/10 bg-white/[0.02] p-4 md:p-5 flex items-start gap-3 text-[12px] leading-relaxed text-white/55">
+          <ShieldCheck className="h-4 w-4 mt-0.5 text-[color:var(--gold)] shrink-0" />
+          <p>
+            <span className="text-white/75 font-medium">Important.</span> Share B&amp;B is
+            a marketplace and matching platform. We do not provide legal, financial, tax,
+            investment, immigration, or real estate brokerage advice, and we do not
+            guarantee rental returns or residency approval. Please speak with a licensed
+            Cypriot lawyer, tax advisor, and immigration specialist before committing.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ─────────────────────────  2. FEATURED  ───────────────────────── */
 function FeaturedProperties() {
   return (
