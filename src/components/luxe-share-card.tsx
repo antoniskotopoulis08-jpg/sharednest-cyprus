@@ -3,8 +3,11 @@ import { Link } from "@tanstack/react-router";
 import {
   MapPin, Heart, Sparkles, TrendingUp, Wallet, Home,
   CalendarDays, Waves, Shield, Gauge, Briefcase, Info, ScrollText,
+  Flame, LineChart, School, Users, Star,
 } from "lucide-react";
-import { formatEUR } from "@/lib/properties";
+import { formatEUR, type Property } from "@/lib/properties";
+
+export type PropertyCategory = "invest" | "residency" | "hybrid";
 
 export type LuxeCardData = {
   id: string;
@@ -17,17 +20,32 @@ export type LuxeCardData = {
   monthly: number;
   mode: "invest" | "lifestyle";
   tagline: string;
-  // Optional context
-  yearlyRentalFullPct?: number; // rental yield of full property, e.g. 5.5 (%)
-  occupancyPct?: number; // e.g. 78
-  riskLevel?: "Low" | "Moderate" | "Balanced" | "Higher";
-  mgmtFeePct?: number; // % of rental income, e.g. 12
-  beachKm?: number; // distance in km
+  category?: PropertyCategory;
+  availableSharePct?: number; // 0-100
+
+  // Investment
+  yearlyRentalFullPct?: number;
+  occupancyPct?: number;
+  riskLevel?: "Low" | "Medium" | "High";
+  mgmtFeePct?: number;
+  rentalDemand?: "Low" | "Steady" | "Strong" | "Very strong";
+  capitalGrowth?: "Stable" | "Moderate" | "Strong" | "Emerging";
+
+  // Residency / lifestyle
+  beachKm?: number;
   centerKm?: number;
-  lifestyleScore?: number; // 0-100
+  schoolKm?: number;
+  lifestyleScore?: number;
+  familySuitability?: "Solo / couples" | "Young families" | "All ages" | "Retirees";
 };
 
 type View = "invest" | "lifestyle";
+
+const CATEGORY_META: Record<PropertyCategory, { label: string; icon: typeof TrendingUp }> = {
+  invest: { label: "Best for Investment", icon: TrendingUp },
+  residency: { label: "Best for Residency", icon: Home },
+  hybrid: { label: "Hybrid Opportunity", icon: Sparkles },
+};
 
 export function LuxeShareCard({ data }: { data: LuxeCardData }) {
   const [stake, setStake] = useState<number>(data.stakes[1] ?? data.stakes[0]);
@@ -36,22 +54,28 @@ export function LuxeShareCard({ data }: { data: LuxeCardData }) {
   const derived = useMemo(() => {
     const yearlyFullPct = data.yearlyRentalFullPct ?? 5.4;
     const occupancy = data.occupancyPct ?? 74;
-    const risk = data.riskLevel ?? "Balanced";
+    const risk = data.riskLevel ?? "Medium";
     const mgmtPct = data.mgmtFeePct ?? 12;
+    const rentalDemand = data.rentalDemand ?? "Steady";
+    const capitalGrowth = data.capitalGrowth ?? "Moderate";
     const beachKm = data.beachKm ?? 0.6;
     const centerKm = data.centerKm ?? 1.2;
+    const schoolKm = data.schoolKm ?? 1.5;
     const lifestyle = data.lifestyleScore ?? 88;
+    const family = data.familySuitability ?? "All ages";
+    const availShare = data.availableSharePct ?? 60;
+    const minStake = Math.min(...data.stakes);
+    const minSharePrice = Math.round((data.fullPrice * minStake) / 100);
 
     const sharePrice = Math.round((data.fullPrice * stake) / 100);
     const monthly = Math.round((data.monthly * stake) / 100);
-    // 365 days shared by stake — 12.5% → ~46, 25% → ~91, 50% → ~182
     const personalDays = Math.round((365 * stake) / 100);
     const yearlyRentalFull = Math.round(
       (data.fullPrice * yearlyFullPct * (occupancy / 100)) / 100
     );
     const yearlyRentalShare = Math.round((yearlyRentalFull * stake) / 100);
     const netAfterFee = Math.round(yearlyRentalShare * (1 - mgmtPct / 100));
-    // AI match reasoning
+
     const matchAdj = Math.max(
       60,
       Math.min(99, Math.round(data.matchPct - Math.abs(stake - 25) * 0.4))
@@ -59,29 +83,20 @@ export function LuxeShareCard({ data }: { data: LuxeCardData }) {
 
     const matchReason =
       view === "invest"
-        ? `Aligned with a ${stake}% investment stake at ~${yearlyFullPct}% yield · ${risk.toLowerCase()} risk profile`
-        : `Fits ${personalDays} personal-use days/year · ${beachKm} km to beach · lifestyle score ${lifestyle}`;
+        ? `${stake}% stake · ~${formatEUR(netAfterFee)}/yr est. after fees · ${risk.toLowerCase()} risk`
+        : `${personalDays} personal-use days/yr · ${beachKm} km beach · ${family.toLowerCase()}`;
 
     return {
-      sharePrice,
-      monthly,
-      personalDays,
-      yearlyRentalFull,
-      yearlyRentalShare,
-      netAfterFee,
-      matchAdj,
-      matchReason,
-      occupancy,
-      risk,
-      mgmtPct,
-      beachKm,
-      centerKm,
-      lifestyle,
-      yearlyFullPct,
+      sharePrice, monthly, personalDays, netAfterFee, yearlyFullPct,
+      matchAdj, matchReason, occupancy, risk, mgmtPct, rentalDemand,
+      capitalGrowth, beachKm, centerKm, schoolKm, lifestyle, family,
+      availShare, minStake, minSharePrice,
     };
   }, [data, stake, view]);
 
-  const ModeIcon = view === "invest" ? TrendingUp : Home;
+  const category = data.category ?? (data.mode === "invest" ? "invest" : "residency");
+  const cat = CATEGORY_META[category];
+  const CatIcon = cat.icon;
 
   return (
     <div
@@ -100,10 +115,11 @@ export function LuxeShareCard({ data }: { data: LuxeCardData }) {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(180deg, oklch(0.14 0.04 250 / 0.55) 0%, transparent 40%, oklch(0.14 0.04 250 / 0.75) 100%)",
+              "linear-gradient(180deg, oklch(0.14 0.04 250 / 0.55) 0%, transparent 35%, oklch(0.14 0.04 250 / 0.85) 100%)",
           }}
         />
 
+        {/* Top row */}
         <div className="absolute inset-x-4 top-4 flex items-start justify-between">
           <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium text-white backdrop-blur-md bg-white/10 border border-white/15">
             <MapPin className="h-3 w-3 text-[color:var(--gold)]" /> {data.city}
@@ -117,29 +133,35 @@ export function LuxeShareCard({ data }: { data: LuxeCardData }) {
           </button>
         </div>
 
+        {/* Animated category tag */}
+        <div className="absolute left-4 bottom-16 animate-fade-in">
+          <span
+            className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-semibold text-[color:var(--gold-foreground)] shadow-[0_10px_30px_-10px_oklch(0.75_0.12_82/0.5)]"
+            style={{ background: "var(--gradient-gold)" }}
+          >
+            <CatIcon className="h-3 w-3" /> {cat.label}
+          </span>
+        </div>
+
+        {/* Bottom row */}
         <div className="absolute inset-x-4 bottom-4 flex items-center justify-between gap-2">
           <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium text-white backdrop-blur-md bg-black/40 border border-white/10">
             <Sparkles className="h-3 w-3 text-[color:var(--gold)]" />{" "}
             <span className="tabular-nums">{derived.matchAdj}%</span> AI Match
           </span>
-          <span
-            className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium text-[color:var(--gold-foreground)]"
-            style={{ background: "var(--gradient-gold)" }}
-          >
-            <ModeIcon className="h-3 w-3" /> {data.tagline}
+          <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium text-white backdrop-blur-md bg-black/40 border border-white/10">
+            <span className="tabular-nums">{derived.availShare}%</span> available
           </span>
         </div>
       </div>
 
       {/* Body */}
       <div className="p-5 text-white">
-        {/* Header */}
-        <div className="flex items-start justify-between gap-3">
-          <div className="min-w-0">
-            <h3 className="font-serif text-2xl leading-tight truncate">{data.title}</h3>
-            <div className="mt-1 text-xs text-white/50">
-              Full property {formatEUR(data.fullPrice)}
-            </div>
+        <div className="min-w-0">
+          <h3 className="font-serif text-2xl leading-tight truncate">{data.title}</h3>
+          <div className="mt-1 text-xs text-white/50">
+            Full property {formatEUR(data.fullPrice)} · from {formatEUR(derived.minSharePrice)}{" "}
+            ({derived.minStake}%)
           </div>
         </div>
 
@@ -187,22 +209,35 @@ export function LuxeShareCard({ data }: { data: LuxeCardData }) {
             <>
               <MicroStat
                 icon={<TrendingUp className="h-3.5 w-3.5" />}
-                label="Rental potential"
-                value={`${formatEUR(derived.netAfterFee)}/yr`}
+                label="Est. annual income"
+                value={`${formatEUR(derived.netAfterFee)}`}
                 sub={`${derived.yearlyFullPct}% gross · net of fees`}
               />
               <MicroStat
                 icon={<Gauge className="h-3.5 w-3.5" />}
-                label="Occupancy"
+                label="Occupancy potential"
                 value={`${derived.occupancy}%`}
                 sub="Trailing 12-month est."
                 bar={derived.occupancy}
+              />
+              <MicroStat
+                icon={<Flame className="h-3.5 w-3.5" />}
+                label="Rental demand"
+                value={derived.rentalDemand}
+                sub="Local booking signals"
+              />
+              <MicroStat
+                icon={<LineChart className="h-3.5 w-3.5" />}
+                label="Capital growth"
+                value={derived.capitalGrowth}
+                sub="Area outlook — not a forecast"
               />
               <MicroStat
                 icon={<Shield className="h-3.5 w-3.5" />}
                 label="Risk level"
                 value={derived.risk}
                 sub="Diversified co-owners"
+                riskTone={derived.risk}
               />
               <MicroStat
                 icon={<Briefcase className="h-3.5 w-3.5" />}
@@ -214,23 +249,35 @@ export function LuxeShareCard({ data }: { data: LuxeCardData }) {
           ) : (
             <>
               <MicroStat
-                icon={<CalendarDays className="h-3.5 w-3.5" />}
-                label="Personal-use days"
-                value={`${derived.personalDays} / yr`}
-                sub="Rotating booking calendar"
-              />
-              <MicroStat
                 icon={<Waves className="h-3.5 w-3.5" />}
-                label="Distance"
-                value={`${derived.beachKm} km beach`}
+                label="Distance to beach"
+                value={`${derived.beachKm} km`}
                 sub={`${derived.centerKm} km to centre`}
               />
               <MicroStat
-                icon={<Sparkles className="h-3.5 w-3.5" />}
+                icon={<School className="h-3.5 w-3.5" />}
+                label="Schools / centre"
+                value={`${derived.schoolKm} km`}
+                sub="Nearest int'l school"
+              />
+              <MicroStat
+                icon={<Star className="h-3.5 w-3.5" />}
                 label="Lifestyle score"
                 value={`${derived.lifestyle}/100`}
                 sub="Walkability · dining · sea"
                 bar={derived.lifestyle}
+              />
+              <MicroStat
+                icon={<Users className="h-3.5 w-3.5" />}
+                label="Family suitability"
+                value={derived.family}
+                sub="Layout · schools · safety"
+              />
+              <MicroStat
+                icon={<CalendarDays className="h-3.5 w-3.5" />}
+                label="Personal-use days"
+                value={`${derived.personalDays} / yr`}
+                sub="Rotating booking calendar"
               />
               <MicroStat
                 icon={<ScrollText className="h-3.5 w-3.5" />}
@@ -326,7 +373,7 @@ function Stat({
 }
 
 function MicroStat({
-  icon, label, value, sub, bar, badge,
+  icon, label, value, sub, bar, badge, riskTone,
 }: {
   icon: React.ReactNode;
   label: string;
@@ -334,15 +381,24 @@ function MicroStat({
   sub?: string;
   bar?: number;
   badge?: boolean;
+  riskTone?: "Low" | "Medium" | "High";
 }) {
+  const toneClass =
+    riskTone === "Low"
+      ? "text-emerald-300"
+      : riskTone === "High"
+      ? "text-rose-300"
+      : riskTone === "Medium"
+      ? "text-amber-300"
+      : "text-white";
   return (
-    <div className="rounded-lg border border-white/10 bg-white/[0.03] p-3">
+    <div className="rounded-lg border border-white/10 bg-white/[0.03] p-3 transition-colors hover:border-white/20">
       <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.18em] text-white/50 font-mono">
         <span className="text-[color:var(--gold)]">{icon}</span>
         {label}
       </div>
       <div className="mt-1.5 flex items-center gap-2">
-        <div className="text-sm font-medium text-white tabular-nums">{value}</div>
+        <div className={"text-sm font-medium tabular-nums " + toneClass}>{value}</div>
         {badge && (
           <span className="rounded-full border border-[color:var(--gold)]/40 bg-[color:var(--gold)]/10 px-1.5 py-0.5 text-[9px] uppercase tracking-widest text-[color:var(--gold)]">
             Advised
@@ -360,4 +416,46 @@ function MicroStat({
       {sub && <div className="mt-1 text-[10px] text-white/45">{sub}</div>}
     </div>
   );
+}
+
+/* Adapter: turn a library Property into LuxeCardData with sensible Cyprus defaults. */
+export function propertyToLuxe(p: Property): LuxeCardData {
+  const coastal = ["Limassol", "Paphos", "Larnaca", "Ayia Napa"].includes(p.city);
+  const category: PropertyCategory =
+    p.expectedUse === "Rental income"
+      ? "invest"
+      : p.expectedUse === "Personal use"
+      ? "residency"
+      : "hybrid";
+  return {
+    id: p.id,
+    title: p.title,
+    city: `${p.city}, Cyprus`,
+    image: p.image,
+    fullPrice: p.fullPrice,
+    stakes: [12.5, 25, 50],
+    matchPct: 82 + Math.round((p.availableSharePct % 15)),
+    monthly: p.monthlyCosts,
+    mode: category === "residency" ? "lifestyle" : "invest",
+    tagline:
+      category === "invest"
+        ? "High rental potential"
+        : category === "residency"
+        ? "Residency / lifestyle"
+        : "Holiday + investment",
+    category,
+    availableSharePct: p.availableSharePct,
+    yearlyRentalFullPct: coastal ? 5.8 : 4.6,
+    occupancyPct: coastal ? 78 : 62,
+    riskLevel: category === "invest" ? "Medium" : "Low",
+    mgmtFeePct: 12,
+    rentalDemand: coastal ? "Strong" : "Steady",
+    capitalGrowth: p.city === "Limassol" ? "Strong" : coastal ? "Moderate" : "Stable",
+    beachKm: coastal ? 0.4 : 45,
+    centerKm: 1.2,
+    schoolKm: 2.0,
+    lifestyleScore: coastal ? 92 : 84,
+    familySuitability:
+      p.bedrooms >= 4 ? "Young families" : p.bedrooms === 3 ? "All ages" : "Solo / couples",
+  };
 }
