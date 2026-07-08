@@ -1,14 +1,13 @@
 import { Link } from "@tanstack/react-router";
+import { BrandWordmark } from "@/components/brand-logo";
 
 export function SiteFooter() {
   return (
     <footer className="mt-24 border-t border-border bg-secondary/50">
       <div className="container-page py-14 grid gap-10 md:grid-cols-4">
         <div className="md:col-span-2">
-          <div className="font-serif text-2xl tracking-tight">
-            Shared<span className="text-gold">Nest</span>
-          </div>
-          <p className="mt-3 text-sm text-muted-foreground max-w-sm">
+          <BrandWordmark size="md" showTagline />
+          <p className="mt-5 text-sm text-muted-foreground max-w-sm">
             An AI-powered marketplace for real estate co-ownership in Cyprus. Own a share of a
             home you love, alongside verified co-buyers.
           </p>

@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Mail, MapPin, Phone, CheckCircle2 } from "lucide-react";
 import { Disclaimer } from "@/components/disclaimer";
+import { BrandWordmark } from "@/components/brand-logo";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -63,6 +64,9 @@ function Contact() {
           )}
         </div>
         <aside className="space-y-4">
+          <div className="rounded-xl border border-border bg-card p-5 flex items-center gap-4">
+            <BrandWordmark size="md" showTagline />
+          </div>
           <InfoRow icon={MapPin} title="Office" body="Limassol Marina, Cyprus" />
           <InfoRow icon={Mail} title="Email" body="hello@sharednest.com" />
           <InfoRow icon={Phone} title="Phone" body="+357 25 000 000" />
