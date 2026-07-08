@@ -138,8 +138,8 @@ function Hero() {
         />
       </div>
 
-      <div className="relative container-page pt-8 pb-20 md:pt-12 md:pb-28">
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+      <div className="relative container-page pt-3 pb-16 md:pt-5 md:pb-20">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-14 items-start">
           {/* Left copy */}
           <div className="lg:col-span-7 animate-reveal">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 backdrop-blur px-3 py-1.5 text-[11px] font-mono uppercase tracking-[0.25em] text-white/70">
