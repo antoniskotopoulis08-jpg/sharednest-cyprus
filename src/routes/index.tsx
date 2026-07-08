@@ -208,7 +208,7 @@ function Hero() {
       </div>
 
       {/* Bottom ticker */}
-      <div className="relative border-t border-white/10 bg-black/30 backdrop-blur-sm text-white/60 overflow-hidden">
+      <div className="relative border-t border-white/10 bg-black/30 backdrop-blur-sm text-white/80 overflow-hidden">
         <div className="flex whitespace-nowrap animate-ticker py-3 text-xs uppercase tracking-[0.3em]">
           {Array.from({ length: 2 }).map((_, i) => (
             <div key={i} className="flex shrink-0">
@@ -277,7 +277,7 @@ function PathsSplit() {
           <h2 className="mt-4 font-serif text-4xl md:text-5xl leading-[1.05]">
             Choose how you want to own in Cyprus.
           </h2>
-          <p className="mt-4 text-white/60 max-w-xl">
+          <p className="mt-4 text-white/80 max-w-xl">
             SharedNest matches two very different buyers to the right kind of home.
             Pick the path that fits — or explore both.
           </p>
@@ -329,20 +329,20 @@ function PathsSplit() {
                     </Link>
                     <Link
                       to="/matchmaker"
-                      className="text-xs text-white/60 hover:text-white underline underline-offset-4"
+                      className="text-xs text-white/80 hover:text-white underline underline-offset-4"
                     >
                       Take the AI Match Quiz
                     </Link>
                   </div>
 
-                  <div className="mt-6 text-[11px] text-white/45 italic">{p.note}</div>
+                  <div className="mt-6 text-[11px] text-white/75 italic">{p.note}</div>
                 </div>
               </div>
             );
           })}
         </div>
 
-        <div className="mt-10 rounded-xl border border-white/10 bg-white/[0.02] p-4 md:p-5 flex items-start gap-3 text-[12px] leading-relaxed text-white/55">
+        <div className="mt-10 rounded-xl border border-white/10 bg-white/[0.02] p-4 md:p-5 flex items-start gap-3 text-[12px] leading-relaxed text-white/80">
           <ShieldCheck className="h-4 w-4 mt-0.5 text-[color:var(--gold)] shrink-0" />
           <p>
             <span className="text-white/75 font-medium">Important.</span> SharedNest is
