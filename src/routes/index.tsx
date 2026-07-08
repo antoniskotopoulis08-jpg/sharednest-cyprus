@@ -138,8 +138,8 @@ function Hero() {
         />
       </div>
 
-      <div className="relative container-page pt-20 pb-24 md:pt-28 md:pb-32">
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+      <div className="relative container-page pt-8 pb-20 md:pt-12 md:pb-28">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-14 items-center">
           {/* Left copy */}
           <div className="lg:col-span-7 animate-reveal">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 backdrop-blur px-3 py-1.5 text-[11px] font-mono uppercase tracking-[0.25em] text-white/70">
@@ -147,18 +147,18 @@ function Hero() {
               Cyprus · Co-ownership marketplace
             </div>
 
-            <h1 className="mt-7 font-serif tracking-tight text-5xl md:text-7xl lg:text-[5.25rem] leading-[0.98]">
+            <h1 className="mt-5 font-serif tracking-tight text-5xl md:text-7xl lg:text-[5.25rem] leading-[0.98]">
               Own a share of{" "}
               <em className="italic text-[color:var(--gold)] font-serif">Cyprus'</em>{" "}
               most desirable homes.
             </h1>
 
-            <p className="mt-8 max-w-xl text-lg text-white/70 leading-relaxed">
+            <p className="mt-6 max-w-xl text-lg text-white/70 leading-relaxed">
               SharedNest uses AI to match buyers with co-ownership opportunities
               based on budget, lifestyle, location, and ownership goals.
             </p>
 
-            <div className="mt-10 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 to="/browse"
                 className="group inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-medium text-[color:var(--gold-foreground)] hover:opacity-90 transition-all"
