@@ -218,10 +218,10 @@ export function AffordabilityCalculator() {
 
         {/* Disclaimer */}
         <div className="rounded-lg border border-border bg-secondary/30 p-4 text-xs text-muted-foreground leading-relaxed">
-          <strong className="text-foreground">Disclaimer:</strong> Estimates are for demonstration only
-          and are not financial advice. Actual costs, legal fees, and rental income will vary by
-          property, jurisdiction, and individual circumstances. Share B&amp;B is a marketplace and does
-          not provide legal, financial, or investment advice.
+          <strong className="text-foreground">Disclaimer.</strong> Share B&amp;B is a marketplace
+          and matching platform. We do not provide legal, financial, tax, investment, immigration,
+          or real estate brokerage advice. All estimates are for informational purposes only.
+          Users should consult licensed professionals before making decisions.
         </div>
 
         <div className="flex flex-wrap gap-3">
