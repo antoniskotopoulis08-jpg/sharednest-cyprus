@@ -178,3 +178,30 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
     </label>
   );
 }
+
+function ScoreRing({ score, delay = 0 }: { score: number; delay?: number }) {
+  const [value, setValue] = useState(0);
+  useEffect(() => {
+    const t = setTimeout(() => setValue(score), delay + 60);
+    return () => clearTimeout(t);
+  }, [score, delay]);
+  const r = 26;
+  const c = 2 * Math.PI * r;
+  const offset = c - (value / 100) * c;
+  return (
+    <div className="relative h-16 w-16 shrink-0">
+      <svg viewBox="0 0 64 64" className="h-full w-full -rotate-90">
+        <circle cx="32" cy="32" r={r} stroke="var(--border)" strokeWidth="4" fill="none" />
+        <circle
+          cx="32" cy="32" r={r}
+          stroke="var(--gold)" strokeWidth="4" fill="none" strokeLinecap="round"
+          strokeDasharray={c} strokeDashoffset={offset}
+          style={{ transition: "stroke-dashoffset 1200ms cubic-bezier(0.2,0.8,0.2,1)" }}
+        />
+      </svg>
+      <div className="absolute inset-0 grid place-items-center font-serif text-lg">
+        <CountUp value={value} format={(n) => `${n}`} duration={1100} />
+      </div>
+    </div>
+  );
+}
