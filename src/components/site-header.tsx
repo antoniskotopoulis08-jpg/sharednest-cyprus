@@ -3,14 +3,12 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const nav = [
-  { to: "/", label: "Home" },
-  { to: "/browse", label: "Browse" },
-  { to: "/how-it-works", label: "How it works" },
-  { to: "/calculator", label: "Calculator" },
+  { to: "/browse", label: "Browse Properties" },
+  { to: "/invest", label: "Invest" },
+  { to: "/residency", label: "Residency & Lifestyle" },
   { to: "/matchmaker", label: "AI Matchmaker" },
-  { to: "/list-property", label: "List a property" },
-  { to: "/dashboard", label: "Dashboard" },
-  { to: "/contact", label: "Contact" },
+  { to: "/how-it-works", label: "How It Works" },
+  { to: "/list-property", label: "List a Property" },
 ] as const;
 
 export function SiteHeader() {
