@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as MatchmakerRouteImport } from './routes/matchmaker'
 import { Route as ListPropertyRouteImport } from './routes/list-property'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
@@ -18,6 +19,11 @@ import { Route as BrowseRouteImport } from './routes/browse'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PropertyIdRouteImport } from './routes/property.$id'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MatchmakerRoute = MatchmakerRouteImport.update({
   id: '/matchmaker',
   path: '/matchmaker',
@@ -67,6 +73,7 @@ export interface FileRoutesByFullPath {
   '/how-it-works': typeof HowItWorksRoute
   '/list-property': typeof ListPropertyRoute
   '/matchmaker': typeof MatchmakerRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/property/$id': typeof PropertyIdRoute
 }
 export interface FileRoutesByTo {
@@ -77,6 +84,7 @@ export interface FileRoutesByTo {
   '/how-it-works': typeof HowItWorksRoute
   '/list-property': typeof ListPropertyRoute
   '/matchmaker': typeof MatchmakerRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/property/$id': typeof PropertyIdRoute
 }
 export interface FileRoutesById {
@@ -88,6 +96,7 @@ export interface FileRoutesById {
   '/how-it-works': typeof HowItWorksRoute
   '/list-property': typeof ListPropertyRoute
   '/matchmaker': typeof MatchmakerRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/property/$id': typeof PropertyIdRoute
 }
 export interface FileRouteTypes {
@@ -100,6 +109,7 @@ export interface FileRouteTypes {
     | '/how-it-works'
     | '/list-property'
     | '/matchmaker'
+    | '/sitemap.xml'
     | '/property/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -110,6 +120,7 @@ export interface FileRouteTypes {
     | '/how-it-works'
     | '/list-property'
     | '/matchmaker'
+    | '/sitemap.xml'
     | '/property/$id'
   id:
     | '__root__'
@@ -120,6 +131,7 @@ export interface FileRouteTypes {
     | '/how-it-works'
     | '/list-property'
     | '/matchmaker'
+    | '/sitemap.xml'
     | '/property/$id'
   fileRoutesById: FileRoutesById
 }
@@ -131,11 +143,19 @@ export interface RootRouteChildren {
   HowItWorksRoute: typeof HowItWorksRoute
   ListPropertyRoute: typeof ListPropertyRoute
   MatchmakerRoute: typeof MatchmakerRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   PropertyIdRoute: typeof PropertyIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/matchmaker': {
       id: '/matchmaker'
       path: '/matchmaker'
@@ -203,6 +223,7 @@ const rootRouteChildren: RootRouteChildren = {
   HowItWorksRoute: HowItWorksRoute,
   ListPropertyRoute: ListPropertyRoute,
   MatchmakerRoute: MatchmakerRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   PropertyIdRoute: PropertyIdRoute,
 }
 export const routeTree = rootRouteImport
