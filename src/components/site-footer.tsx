@@ -41,7 +41,7 @@ export function SiteFooter() {
       <div className="border-t border-border">
         <div className="container-page py-5 text-xs text-muted-foreground flex flex-col sm:flex-row gap-2 justify-between">
           <span>© {new Date().getFullYear()} Share B&amp;B. All rights reserved.</span>
-          <span>Marketplace only — not legal, financial or investment advice.</span>
+          <span>Marketplace &amp; matching platform — informational only, not advice.</span>
         </div>
       </div>
     </footer>
