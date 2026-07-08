@@ -122,16 +122,18 @@ function Dashboard() {
                 <input type="range" min={20_000} max={800_000} step={10_000} value={budget}
                   onChange={(e) => setBudget(Number(e.target.value))} className="w-full accent-[color:var(--gold)]" />
               </label>
-              <div className="rounded-md bg-card border border-border p-3">
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Share price</span>
-                  <span className="font-medium">{formatEUR(share)}</span>
+              <div className="rounded-md bg-card border border-border p-3 font-serif">
+                <div className="flex justify-between items-baseline">
+                  <span className="text-muted-foreground text-xs uppercase tracking-widest font-mono">Share price</span>
+                  <CountUp value={share} format={formatEUR} className="text-xl" />
                 </div>
-                <div className="flex justify-between mt-1">
-                  <span className="text-muted-foreground">{gap > 0 ? "Shortfall" : "Headroom"}</span>
-                  <span className={"font-medium " + (gap > 0 ? "text-destructive" : "text-primary")}>
-                    {formatEUR(Math.abs(gap))}
-                  </span>
+                <div className="flex justify-between items-baseline mt-2">
+                  <span className="text-muted-foreground text-xs uppercase tracking-widest font-mono">{gap > 0 ? "Shortfall" : "Headroom"}</span>
+                  <CountUp
+                    value={Math.abs(gap)}
+                    format={formatEUR}
+                    className={"text-xl " + (gap > 0 ? "text-destructive" : "text-olive")}
+                  />
                 </div>
               </div>
             </div>
