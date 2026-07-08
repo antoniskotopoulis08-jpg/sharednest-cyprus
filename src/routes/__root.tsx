@@ -68,13 +68,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Share B&B — Co-own your dream home in Cyprus" },
+      { title: "SharedNest — Co-own your dream home in Cyprus" },
       {
         name: "description",
         content:
-          "Share B&B is an AI-powered marketplace for real estate co-ownership in Cyprus. Buy a share of a villa, apartment or townhouse alongside verified co-buyers.",
+          "SharedNest is an AI-powered marketplace for real estate co-ownership in Cyprus. Buy a share of a villa, apartment or townhouse alongside verified co-buyers.",
       },
-      { property: "og:title", content: "Share B&B — Co-own your dream home in Cyprus" },
+      { property: "og:title", content: "SharedNest — Co-own your dream home in Cyprus" },
       {
         property: "og:description",
         content:

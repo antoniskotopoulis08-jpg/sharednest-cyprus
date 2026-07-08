@@ -5,9 +5,9 @@ import { Disclaimer } from "@/components/disclaimer";
 export const Route = createFileRoute("/how-it-works")({
   head: () => ({
     meta: [
-      { title: "How Share B&B works — co-ownership in Cyprus" },
-      { name: "description", content: "Learn how the Share B&B marketplace connects verified co-buyers, with lawyers, due diligence and title deed checks on every property." },
-      { property: "og:title", content: "How Share B&B works" },
+      { title: "How SharedNest works — co-ownership in Cyprus" },
+      { name: "description", content: "Learn how the SharedNest marketplace connects verified co-buyers, with lawyers, due diligence and title deed checks on every property." },
+      { property: "og:title", content: "How SharedNest works" },
       { property: "og:description", content: "The trusted co-ownership process, step by step." },
     ],
   }),
@@ -30,7 +30,7 @@ function HowItWorks() {
         <div className="text-xs uppercase tracking-widest text-gold">How it works</div>
         <h1 className="mt-2 font-serif text-4xl md:text-5xl">A trusted path to co-ownership.</h1>
         <p className="mt-4 text-muted-foreground">
-          Share B&amp;B is a marketplace built around Cypriot real estate practice — lawyers,
+          SharedNest is a marketplace built around Cypriot real estate practice — lawyers,
           title deeds and escrow are part of every deal, not an afterthought.
         </p>
       </div>

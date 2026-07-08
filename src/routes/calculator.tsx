@@ -15,13 +15,13 @@ export const Route = createFileRoute("/calculator")({
   component: CalculatorPage,
   head: () => ({
     meta: [
-      { title: "Investment & Residency Calculator | Share B&B" },
+      { title: "Investment & Residency Calculator | SharedNest" },
       {
         name: "description",
         content:
           "Model your Cyprus co-ownership costs. Switch between an investment calculator and a residency / personal-use calculator with animated, transparent estimates.",
       },
-      { property: "og:title", content: "Investment & Residency Calculator | Share B&B" },
+      { property: "og:title", content: "Investment & Residency Calculator | SharedNest" },
       {
         property: "og:description",
         content:

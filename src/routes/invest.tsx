@@ -15,13 +15,13 @@ import { Disclaimer } from "@/components/disclaimer";
 export const Route = createFileRoute("/invest")({
   head: () => ({
     meta: [
-      { title: "Invest in Cyprus property shares | Share B&B" },
+      { title: "Invest in Cyprus property shares | SharedNest" },
       {
         name: "description",
         content:
           "Buy a fractional share of a Cyprus property and access rental-income potential and long-term exposure — with transparent costs and AI-powered matching.",
       },
-      { property: "og:title", content: "Invest in Cyprus property shares | Share B&B" },
+      { property: "og:title", content: "Invest in Cyprus property shares | SharedNest" },
       {
         property: "og:description",
         content:
@@ -149,7 +149,7 @@ function InvestPage() {
                 to="/how-it-works"
                 className="inline-flex items-center gap-2 rounded-md border border-border px-5 py-3 text-sm font-medium hover:bg-background/40 transition-colors"
               >
-                How Share B&B works
+                How SharedNest works
               </Link>
             </div>
           </div>

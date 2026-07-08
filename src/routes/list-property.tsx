@@ -7,9 +7,9 @@ import { CheckCircle2 } from "lucide-react";
 export const Route = createFileRoute("/list-property")({
   head: () => ({
     meta: [
-      { title: "List your property for co-ownership — Share B&B" },
-      { name: "description", content: "Owners: list your Cyprus home on Share B&B and offer a share to verified co-buyers." },
-      { property: "og:title", content: "List your property on Share B&B" },
+      { title: "List your property for co-ownership — SharedNest" },
+      { name: "description", content: "Owners: list your Cyprus home on SharedNest and offer a share to verified co-buyers." },
+      { property: "og:title", content: "List your property on SharedNest" },
       { property: "og:description", content: "Reach verified co-buyers across Cyprus and Europe." },
     ],
   }),
