@@ -47,45 +47,46 @@
 
 :root {
   --radius: 0.375rem;
-  /* Ivory background */
-  --background: #F7F3EC;
-  --foreground: #0F2A22;
+  /* Deep forest green background */
+  --background: #0F2A22;
+  --foreground: #F7F3EC;
 
-  --card: #FBF8F2;
-  --card-foreground: #0F2A22;
-  --popover: #FBF8F2;
-  --popover-foreground: #0F2A22;
+  --card: #163329;
+  --card-foreground: #F7F3EC;
+  --popover: #163329;
+  --popover-foreground: #F7F3EC;
 
-  /* Deep forest green */
-  --primary: #0F2A22;
-  --primary-foreground: #F7F3EC;
+  /* Soft gold primary on dark */
+  --primary: #C8A76B;
+  --primary-foreground: #0F2A22;
 
-  --secondary: #E8DFD1;
-  --secondary-foreground: #0F2A22;
+  --secondary: #1C3A31;
+  --secondary-foreground: #F7F3EC;
 
-  --muted: #E8DFD1;
-  --muted-foreground: #556760;
+  --muted: #1C3A31;
+  --muted-foreground: #B7B8AE;
 
-  --accent: #D8CEBE;
-  --accent-foreground: #0F2A22;
+  --accent: #24493D;
+  --accent-foreground: #F7F3EC;
 
   /* Soft gold */
-  --gold: #C8A76B;
+  --gold: #D8BA80;
   --gold-foreground: #0F2A22;
 
   /* Dark olive */
-  --olive: #1C3A31;
+  --olive: #24493D;
 
-  --sand: #E8DFD1;
-  --limestone: #DED4C2;
+  --sand: #1C3A31;
+  --limestone: #24493D;
 
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: #F7F3EC;
 
-  --border: #B7B8AE;
-  --input: #C7C6BC;
+  --border: color-mix(in oklab, #B7B8AE 25%, transparent);
+  --input: color-mix(in oklab, #B7B8AE 30%, transparent);
   --ring: #C8A76B;
 }
+
 
 .dark {
   --background: #0F2A22;
