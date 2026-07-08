@@ -739,7 +739,7 @@ function OwnerCTA() {
 /* ─────────────────────────  8. FINAL CTA  ───────────────────────── */
 function FinalCTA() {
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden text-foreground">
       <div className="absolute inset-0">
         <img
           src={paphosImg}
@@ -753,15 +753,22 @@ function FinalCTA() {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(180deg, oklch(0.18 0.06 150 / 0.85) 0%, oklch(0.22 0.07 150 / 0.9) 100%)",
+              "linear-gradient(180deg, oklch(0.10 0.035 150 / 0.92) 0%, oklch(0.12 0.04 150 / 0.96) 60%, oklch(0.08 0.03 150 / 0.98) 100%)",
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(800px 500px at 50% 0%, oklch(0.10 0.03 150 / 0.85), transparent 70%)",
           }}
         />
       </div>
-      <div className="relative container-page py-24 md:py-32 text-primary-foreground text-center">
-        <div className="eyebrow mx-auto" style={{ color: "oklch(0.85 0.13 82)" }}>
+      <div className="relative container-page py-24 md:py-32 text-center">
+        <div className="eyebrow mx-auto text-gold">
           07 — Get started
         </div>
-        <h2 className="mt-4 mx-auto max-w-3xl text-display text-4xl md:text-6xl">
+        <h2 className="mt-4 mx-auto max-w-3xl text-display text-4xl md:text-6xl text-[#F7F3EC]">
           Property ownership in Cyprus,{" "}
           <em className="italic text-gold" style={{ fontFamily: "var(--font-serif)" }}>
             made more accessible.
@@ -778,9 +785,9 @@ function FinalCTA() {
           </Link>
           <Link
             to="/browse"
-            className="inline-flex items-center gap-2 rounded-sm border border-primary-foreground/25 px-6 py-3.5 text-sm hover:bg-primary-foreground/5"
+            className="inline-flex items-center gap-2 rounded-sm border border-gold/60 bg-[#0F2A22] px-6 py-3.5 text-sm font-medium text-[#F7F3EC] hover:bg-[#0F2A22]/90 hover:border-gold transition-colors"
           >
-            <ShieldCheck className="h-4 w-4" /> Browse verified listings
+            <ShieldCheck className="h-4 w-4 text-gold" /> Browse verified listings
           </Link>
         </div>
       </div>
