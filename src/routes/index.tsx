@@ -387,7 +387,7 @@ function AffordabilityComparison() {
               <span className="text-gold font-medium">{formatEUR(share)}</span> — and split
               costs with vetted co-owners.
             </p>
-            <label className="mt-8 block">
+          <label className="mt-8 block">
               <div className="flex justify-between text-xs font-mono uppercase tracking-widest opacity-70">
                 <span>Your share</span><span>{pct}%</span>
               </div>
@@ -397,6 +397,12 @@ function AffordabilityComparison() {
                 className="mt-2 w-full accent-[color:var(--gold)]"
               />
             </label>
+            <Link
+              to="/calculator"
+              className="mt-6 inline-flex items-center gap-2 text-sm text-gold hover:underline underline-offset-4"
+            >
+              <Calculator className="h-4 w-4" /> Open full affordability calculator
+            </Link>
           </div>
 
           <div className="lg:col-span-7 grid gap-4 sm:grid-cols-2">
