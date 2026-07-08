@@ -146,7 +146,7 @@ function Hero() {
                 style={{ background: "var(--gradient-gold)" }}
               >
                 <TrendingUp className="h-4 w-4" />
-                Explore Investment Shares
+                I Want to Invest
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
@@ -154,7 +154,7 @@ function Hero() {
                 className="group inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 backdrop-blur px-6 py-3.5 text-sm font-medium text-white hover:bg-white/10 transition-colors"
               >
                 <HomeIcon className="h-4 w-4 text-[color:var(--gold)]" />
-                Find a Home for Lifestyle or Residency
+                I Want to Live or Use the Property
               </Link>
             </div>
 
