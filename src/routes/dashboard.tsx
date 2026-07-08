@@ -8,9 +8,9 @@ import { CountUp } from "@/components/count-up";
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
     meta: [
-      { title: "Buyer dashboard — Share B&B" },
-      { name: "description", content: "Track saved properties, matched co-buyers and calculate affordability on Share B&B." },
-      { property: "og:title", content: "Buyer dashboard — Share B&B" },
+      { title: "Buyer dashboard — SharedNest" },
+      { name: "description", content: "Track saved properties, matched co-buyers and calculate affordability on SharedNest." },
+      { property: "og:title", content: "Buyer dashboard — SharedNest" },
       { property: "og:description", content: "Your saved properties and matched co-buyers." },
     ],
   }),

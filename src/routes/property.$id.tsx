@@ -16,11 +16,11 @@ export const Route = createFileRoute("/property/$id")({
     return { property: p };
   },
   head: ({ loaderData }) => {
-    if (!loaderData) return { meta: [{ title: "Property not found — Share B&B" }, { name: "robots", content: "noindex" }] };
+    if (!loaderData) return { meta: [{ title: "Property not found — SharedNest" }, { name: "robots", content: "noindex" }] };
     const p = loaderData.property;
     return {
       meta: [
-        { title: `${p.title}, ${p.city} — Share B&B` },
+        { title: `${p.title}, ${p.city} — SharedNest` },
         { name: "description", content: `Co-own ${p.title} in ${p.city}, Cyprus. From ${formatEUR(Math.round(p.fullPrice * p.minSharePct / 100))} for a ${p.minSharePct}% share.` },
         { property: "og:title", content: `${p.title}, ${p.city}` },
         { property: "og:description", content: p.description },
@@ -155,7 +155,7 @@ function PropertyTabs({
         <AlertTriangle className="h-5 w-5 text-[color:var(--gold)] mt-0.5 shrink-0" />
         <p className="text-xs md:text-sm leading-relaxed text-foreground/80">
           <span className="font-medium text-foreground">Important.</span>{" "}
-          Share B&amp;B is a marketplace and matching platform. It does not provide legal,
+          SharedNest is a marketplace and matching platform. It does not provide legal,
           financial, tax, or immigration advice. Residency eligibility and investment
           outcomes depend on official requirements and professional review.
         </p>
@@ -284,7 +284,7 @@ function InvestmentView({
         <InfoBlock icon={<Repeat className="h-4 w-4" />} title="Potential resale options">
           <ul className="mt-2 space-y-1.5 text-sm text-muted-foreground">
             <li>· Sell share to existing co-owners (first refusal)</li>
-            <li>· Relist on Share B&amp;B secondary marketplace</li>
+            <li>· Relist on SharedNest secondary marketplace</li>
             <li>· Group exit if all owners agree to sell the property</li>
           </ul>
         </InfoBlock>

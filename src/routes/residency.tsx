@@ -16,17 +16,17 @@ import { Disclaimer } from "@/components/disclaimer";
 export const Route = createFileRoute("/residency")({
   head: () => ({
     meta: [
-      { title: "Residency & Lifestyle in Cyprus | Share B&B" },
+      { title: "Residency & Lifestyle in Cyprus | SharedNest" },
       {
         name: "description",
         content:
           "Find a Cyprus home that fits your lifestyle, family and long-term plans — as a holiday base, retirement home or digital-nomad base — through co-ownership.",
       },
-      { property: "og:title", content: "Residency & Lifestyle in Cyprus | Share B&B" },
+      { property: "og:title", content: "Residency & Lifestyle in Cyprus | SharedNest" },
       {
         property: "og:description",
         content:
-          "Co-own a Mediterranean home for holidays, retirement or remote work. Share B&B matches you with lifestyle-fit properties across Cyprus.",
+          "Co-own a Mediterranean home for holidays, retirement or remote work. SharedNest matches you with lifestyle-fit properties across Cyprus.",
       },
     ],
   }),
@@ -165,7 +165,7 @@ function ResidencyPage() {
               Lifestyle-first, legally serious.
             </h2>
             <p className="mt-5 text-muted-foreground leading-relaxed">
-              Share B&amp;B matches you with homes that fit your life, then routes you to
+              SharedNest matches you with homes that fit your life, then routes you to
               independent Cypriot lawyers and immigration specialists — because residency and
               personal-use outcomes depend on official requirements and professional review.
             </p>
@@ -180,7 +180,7 @@ function ResidencyPage() {
                 to="/how-it-works"
                 className="inline-flex items-center gap-2 rounded-md border border-border px-5 py-3 text-sm font-medium hover:bg-background/40 transition-colors"
               >
-                How Share B&B works
+                How SharedNest works
               </Link>
             </div>
           </div>
@@ -226,7 +226,7 @@ function ResidencyPage() {
         </div>
         <p className="mt-4 text-xs text-muted-foreground/80 leading-relaxed max-w-3xl">
           Residency eligibility, tax outcomes, and immigration status are determined by
-          Cyprus authorities and depend on each person's situation. Share B&amp;B does not
+          Cyprus authorities and depend on each person's situation. SharedNest does not
           provide immigration, legal, or tax advice. Please speak with licensed legal and
           immigration professionals before making decisions.
         </p>

@@ -10,7 +10,7 @@ export function Disclaimer({ className = "" }: { className?: string }) {
     >
       <Info className="h-5 w-5 shrink-0 text-gold-foreground/70 mt-0.5" />
       <p className="leading-relaxed">
-        Share B&amp;B is a marketplace and matching platform. We do not provide legal,
+        SharedNest is a marketplace and matching platform. We do not provide legal,
         financial, tax, investment, immigration, or real estate brokerage advice. All
         estimates are for informational purposes only. Users should consult licensed
         professionals before making decisions.

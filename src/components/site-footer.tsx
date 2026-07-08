@@ -13,7 +13,7 @@ export function SiteFooter() {
             home you love, alongside verified co-buyers.
           </p>
           <p className="mt-6 text-xs text-muted-foreground max-w-md leading-relaxed">
-            <strong className="text-foreground">Disclaimer.</strong> Share B&amp;B is a
+            <strong className="text-foreground">Disclaimer.</strong> SharedNest is a
             marketplace and matching platform. We do not provide legal, financial, tax,
             investment, immigration, or real estate brokerage advice. All estimates are
             for informational purposes only. Users should consult licensed professionals
@@ -40,7 +40,7 @@ export function SiteFooter() {
       </div>
       <div className="border-t border-border">
         <div className="container-page py-5 text-xs text-muted-foreground flex flex-col sm:flex-row gap-2 justify-between">
-          <span>© {new Date().getFullYear()} Share B&amp;B. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} SharedNest. All rights reserved.</span>
           <span>Marketplace &amp; matching platform — informational only, not advice.</span>
         </div>
       </div>

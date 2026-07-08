@@ -11,8 +11,8 @@ import { CountUp } from "@/components/count-up";
 export const Route = createFileRoute("/matchmaker")({
   head: () => ({
     meta: [
-      { title: "AI Co-Buyer Matchmaker — Share B&B" },
-      { name: "description", content: "Take the Share B&B AI quiz — get matched with compatible co-buyers and Cyprus properties." },
+      { title: "AI Co-Buyer Matchmaker — SharedNest" },
+      { name: "description", content: "Take the SharedNest AI quiz — get matched with compatible co-buyers and Cyprus properties." },
       { property: "og:title", content: "AI Co-Buyer Matchmaker" },
       { property: "og:description", content: "Answer a few questions and receive an AI compatibility profile." },
     ],

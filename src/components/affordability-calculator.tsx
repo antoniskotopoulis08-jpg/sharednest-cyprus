@@ -195,7 +195,7 @@ export function AffordabilityCalculator() {
           >
             <div className="relative z-10">
               <div className="text-xs font-mono uppercase tracking-widest opacity-70">
-                Share B&B ownership
+                SharedNest ownership
               </div>
               <div className="mt-3 font-serif text-3xl">
                 <CountUp value={animated ? upfrontCost : 0} format={formatEUR} duration={1000} />
@@ -218,7 +218,7 @@ export function AffordabilityCalculator() {
 
         {/* Disclaimer */}
         <div className="rounded-lg border border-border bg-secondary/30 p-4 text-xs text-muted-foreground leading-relaxed">
-          <strong className="text-foreground">Disclaimer.</strong> Share B&amp;B is a marketplace
+          <strong className="text-foreground">Disclaimer.</strong> SharedNest is a marketplace
           and matching platform. We do not provide legal, financial, tax, investment, immigration,
           or real estate brokerage advice. All estimates are for informational purposes only.
           Users should consult licensed professionals before making decisions.

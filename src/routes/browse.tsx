@@ -7,7 +7,7 @@ import { Search } from "lucide-react";
 export const Route = createFileRoute("/browse")({
   head: () => ({
     meta: [
-      { title: "Browse co-ownership properties in Cyprus — Share B&B" },
+      { title: "Browse co-ownership properties in Cyprus — SharedNest" },
       { name: "description", content: "Search verified villas, apartments and townhouses for shared ownership across Limassol, Paphos, Larnaca, Nicosia and Ayia Napa." },
       { property: "og:title", content: "Browse co-ownership properties in Cyprus" },
       { property: "og:description", content: "Search verified shared-ownership properties across Cyprus." },

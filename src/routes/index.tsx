@@ -154,7 +154,7 @@ function Hero() {
             </h1>
 
             <p className="mt-8 max-w-xl text-lg text-white/70 leading-relaxed">
-              Share B&amp;B uses AI to match buyers with co-ownership opportunities
+              SharedNest uses AI to match buyers with co-ownership opportunities
               based on budget, lifestyle, location, and ownership goals.
             </p>
 
@@ -272,7 +272,7 @@ function PathsSplit() {
             Choose how you want to own in Cyprus.
           </h2>
           <p className="mt-4 text-white/60 max-w-xl">
-            Share B&amp;B matches two very different buyers to the right kind of home.
+            SharedNest matches two very different buyers to the right kind of home.
             Pick the path that fits — or explore both.
           </p>
         </div>
@@ -339,7 +339,7 @@ function PathsSplit() {
         <div className="mt-10 rounded-xl border border-white/10 bg-white/[0.02] p-4 md:p-5 flex items-start gap-3 text-[12px] leading-relaxed text-white/55">
           <ShieldCheck className="h-4 w-4 mt-0.5 text-[color:var(--gold)] shrink-0" />
           <p>
-            <span className="text-white/75 font-medium">Important.</span> Share B&amp;B is
+            <span className="text-white/75 font-medium">Important.</span> SharedNest is
             a marketplace and matching platform. We do not provide legal, financial, tax,
             investment, immigration, or real estate brokerage advice. All estimates are
             for informational purposes only. Users should consult licensed legal, tax,
@@ -621,7 +621,7 @@ function AffordabilityComparison() {
               style={{ background: "var(--gradient-gold)" }}
             >
               <div className="text-xs font-mono uppercase tracking-widest opacity-70">
-                {pct}% share via Share B&amp;B
+                {pct}% share via SharedNest
               </div>
               <div className="mt-4 font-serif text-4xl md:text-5xl">
                 <CountUp value={share} format={formatEUR} duration={500} />
@@ -674,7 +674,7 @@ function TrustLegal() {
           </h2>
         </div>
         <p className="lg:col-span-5 lg:col-start-8 text-muted-foreground">
-          Every deal on Share B&amp;B is reviewed by qualified professionals. Lawyers, banks,
+          Every deal on SharedNest is reviewed by qualified professionals. Lawyers, banks,
           due diligence, title deed checks and written agreements are part of the process —
           not optional add-ons.
         </p>

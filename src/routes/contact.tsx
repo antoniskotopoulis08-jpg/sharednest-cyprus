@@ -6,10 +6,10 @@ import { Disclaimer } from "@/components/disclaimer";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact Share B&B — Cyprus co-ownership" },
-      { name: "description", content: "Get in touch with the Share B&B team in Cyprus for co-ownership enquiries, partnerships and press." },
-      { property: "og:title", content: "Contact Share B&B" },
-      { property: "og:description", content: "Reach the Share B&B team." },
+      { title: "Contact SharedNest — Cyprus co-ownership" },
+      { name: "description", content: "Get in touch with the SharedNest team in Cyprus for co-ownership enquiries, partnerships and press." },
+      { property: "og:title", content: "Contact SharedNest" },
+      { property: "og:description", content: "Reach the SharedNest team." },
     ],
   }),
   component: Contact,
