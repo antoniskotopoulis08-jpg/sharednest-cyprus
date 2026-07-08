@@ -116,7 +116,7 @@ function Home() {
 /* ─────────────────────────  1. HERO (dark luxury)  ───────────────────────── */
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-[oklch(0.11_0.035_250)] text-white">
+    <section className="relative overflow-hidden bg-[oklch(0.11_0.035_150)] text-white">
       {/* Ambient background */}
       <div className="absolute inset-0">
         <img
@@ -128,7 +128,7 @@ function Hero() {
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(1000px 600px at 15% 10%, oklch(0.28 0.08 245 / 0.5), transparent 60%), linear-gradient(180deg, oklch(0.11 0.035 250 / 0.85) 0%, oklch(0.11 0.035 250 / 0.98) 75%)",
+              "radial-gradient(1000px 600px at 15% 10%, oklch(0.28 0.08 150 / 0.5), transparent 60%), linear-gradient(180deg, oklch(0.11 0.035 150 / 0.85) 0%, oklch(0.11 0.035 150 / 0.98) 75%)",
           }}
         />
         {/* gold ember */}
@@ -255,12 +255,12 @@ function PathsSplit() {
   ] as const;
 
   return (
-    <section className="relative bg-[oklch(0.09_0.03_250)] text-white overflow-hidden">
+    <section className="relative bg-[oklch(0.09_0.03_150)] text-white overflow-hidden">
       <div
         className="absolute inset-0 pointer-events-none opacity-60"
         style={{
           background:
-            "radial-gradient(700px 400px at 20% 0%, oklch(0.28 0.08 245 / 0.35), transparent 60%), radial-gradient(700px 400px at 90% 100%, oklch(0.35 0.09 60 / 0.18), transparent 60%)",
+          "radial-gradient(700px 400px at 20% 0%, oklch(0.28 0.08 150 / 0.35), transparent 60%), radial-gradient(700px 400px at 90% 100%, oklch(0.35 0.09 60 / 0.18), transparent 60%)",
         }}
       />
       <div className="relative container-page py-20 md:py-24">
@@ -354,12 +354,12 @@ function PathsSplit() {
 /* ─────────────────────────  2. FEATURED  ───────────────────────── */
 function FeaturedProperties() {
   return (
-    <section className="relative bg-[oklch(0.11_0.035_250)] text-white overflow-hidden">
+    <section className="relative bg-[oklch(0.11_0.035_150)] text-white overflow-hidden">
       <div
         className="absolute inset-0 opacity-40 pointer-events-none"
         style={{
           background:
-            "radial-gradient(800px 400px at 90% 0%, oklch(0.3 0.08 245 / 0.4), transparent 70%)",
+            "radial-gradient(800px 400px at 90% 0%, oklch(0.3 0.08 150 / 0.4), transparent 70%)",
         }}
       />
       <div className="relative container-page py-24">
@@ -747,7 +747,7 @@ function FinalCTA() {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(180deg, oklch(0.18 0.06 250 / 0.85) 0%, oklch(0.22 0.07 250 / 0.9) 100%)",
+              "linear-gradient(180deg, oklch(0.18 0.06 150 / 0.85) 0%, oklch(0.22 0.07 150 / 0.9) 100%)",
           }}
         />
       </div>

@@ -100,7 +100,7 @@ export function LuxeShareCard({ data }: { data: LuxeCardData }) {
 
   return (
     <div
-      className="group relative rounded-2xl overflow-hidden border border-white/10 bg-[oklch(0.14_0.04_250)] transition-all duration-500 hover:border-[color:var(--gold)]/40 hover:-translate-y-1"
+      className="group relative rounded-2xl overflow-hidden border border-white/10 bg-[oklch(0.14_0.04_150)] transition-all duration-500 hover:border-[color:var(--gold)]/40 hover:-translate-y-1"
       style={{ boxShadow: "0 30px 80px -40px oklch(0 0 0 / 0.7)" }}
     >
       {/* Image */}
@@ -115,7 +115,7 @@ export function LuxeShareCard({ data }: { data: LuxeCardData }) {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(180deg, oklch(0.14 0.04 250 / 0.55) 0%, transparent 35%, oklch(0.14 0.04 250 / 0.85) 100%)",
+              "linear-gradient(180deg, oklch(0.14 0.04 150 / 0.55) 0%, transparent 35%, oklch(0.14 0.04 150 / 0.85) 100%)",
           }}
         />
 

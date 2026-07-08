@@ -24,7 +24,7 @@ export function PropertyCard({ p }: { p: Property }) {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(180deg, transparent 40%, oklch(0.18 0.06 250 / 0.85) 100%)",
+              "linear-gradient(180deg, transparent 40%, oklch(0.18 0.06 150 / 0.85) 100%)",
           }}
         />
         {/* Top pills */}
