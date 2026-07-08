@@ -81,8 +81,8 @@ function ResidencyPage() {
         />
         <div className="relative container-page py-20 md:py-28">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-3 py-1 text-xs text-gold-foreground">
-              <Home className="h-3.5 w-3.5" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-gold/45 bg-gold/10 px-3 py-1 text-xs font-medium tracking-wide text-gold">
+              <Home className="h-3.5 w-3.5 text-gold" />
               For residency & personal use
             </div>
             <h1 className="mt-5 text-display text-4xl md:text-6xl leading-[1.05]">
