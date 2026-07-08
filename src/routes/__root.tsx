@@ -78,10 +78,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         property: "og:description",
         content:
-          "AI-powered real estate co-ownership marketplace in Cyprus. Shared ownership, simplified across Limassol, Paphos, Larnaca, Nicosia and Ayia Napa.",
+          "SharedNest is an AI-powered marketplace for real estate co-ownership in Cyprus. Shared ownership, simplified — buy a share of a villa, apartment or townhouse alongside verified co-buyers.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "SharedNest — Shared ownership, simplified" },
+      { name: "twitter:description", content: "SharedNest is an AI-powered marketplace for real estate co-ownership in Cyprus. Shared ownership, simplified — buy a share of a villa, apartment or townhouse alongside verified co-buyers." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ed9e3da2-319b-46b9-94fb-a891fad1a4cc/id-preview-ee765667--9cd179c2-c6b0-456b-8f90-22951c581731.lovable.app-1783502916557.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ed9e3da2-319b-46b9-94fb-a891fad1a4cc/id-preview-ee765667--9cd179c2-c6b0-456b-8f90-22951c581731.lovable.app-1783502916557.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
