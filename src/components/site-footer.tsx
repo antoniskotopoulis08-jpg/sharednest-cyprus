@@ -6,7 +6,7 @@ export function SiteFooter() {
       <div className="container-page py-14 grid gap-10 md:grid-cols-4">
         <div className="md:col-span-2">
           <div className="font-serif text-2xl tracking-tight">
-            Share <span className="text-gold">B&amp;B</span>
+            Shared<span className="text-gold">Nest</span>
           </div>
           <p className="mt-3 text-sm text-muted-foreground max-w-sm">
             An AI-powered marketplace for real estate co-ownership in Cyprus. Own a share of a

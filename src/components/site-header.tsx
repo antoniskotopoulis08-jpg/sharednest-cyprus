@@ -21,7 +21,7 @@ export function SiteHeader() {
             S
           </span>
           <span className="font-serif text-xl tracking-tight">
-            Share <span className="text-gold">B&amp;B</span>
+            Shared<span className="text-gold">Nest</span>
           </span>
         </Link>
         <nav className="hidden lg:flex items-center gap-7 text-sm">
