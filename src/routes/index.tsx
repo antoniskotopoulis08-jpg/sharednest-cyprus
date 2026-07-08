@@ -83,6 +83,7 @@ function Home() {
   return (
     <div>
       <Hero />
+      <PathsSplit />
       <FeaturedProperties />
       <HowItWorks />
       <MatchmakerPreview />
