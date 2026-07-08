@@ -1,16 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import {
-  ShieldCheck, Sparkles, ArrowRight, MapPin, Waves, Scale,
+  ShieldCheck, Sparkles, ArrowRight, Waves, Scale,
   Landmark, FileCheck, Handshake, Search, Users, KeyRound, ArrowUpRight,
-  Calculator,
+  Calculator, TrendingUp, Home as HomeIcon,
 } from "lucide-react";
 import heroImg from "@/assets/hero-villa.jpg";
 import limassolImg from "@/assets/prop-limassol.jpg";
 import paphosImg from "@/assets/prop-paphos.jpg";
 import larnacaImg from "@/assets/prop-larnaca.jpg";
-import { properties, formatEUR } from "@/lib/properties";
-import { PropertyCard } from "@/components/property-card";
+import { formatEUR } from "@/lib/properties";
+import { LuxeShareCard, type LuxeCardData } from "@/components/luxe-share-card";
 import { Disclaimer } from "@/components/disclaimer";
 import { CountUp } from "@/components/count-up";
 
