@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { BrandWordmark } from "@/components/brand-logo";
 
 const nav = [
   { to: "/browse", label: "Browse Properties" },
@@ -16,13 +17,8 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
       <div className="container-page flex h-16 items-center justify-between gap-4">
-        <Link to="/" className="flex items-center gap-2 shrink-0">
-          <span className="grid h-9 w-9 place-items-center rounded-md bg-primary text-primary-foreground font-serif text-lg">
-            S
-          </span>
-          <span className="font-serif text-xl tracking-tight">
-            Shared<span className="text-gold">Nest</span>
-          </span>
+        <Link to="/" className="flex items-center gap-2 shrink-0" aria-label="SharedNest home">
+          <BrandWordmark size="sm" />
         </Link>
         <nav className="hidden lg:flex items-center gap-7 text-sm">
           {nav.map((n) => (
