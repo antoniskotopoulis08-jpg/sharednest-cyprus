@@ -250,7 +250,7 @@ function PathsSplit() {
       ],
       ctaLabel: "I Want to Live or Use the Property",
       ctaIcon: HomeIcon,
-      note: "Residency outcomes depend on Cypriot authorities — never guaranteed by Share B&B.",
+      note: "Residency eligibility is determined by Cypriot authorities. Speak with licensed legal and immigration professionals.",
     },
   ] as const;
 
