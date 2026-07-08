@@ -38,9 +38,12 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-border">
-        <div className="container-page py-5 text-xs text-muted-foreground flex flex-col sm:flex-row gap-2 justify-between">
-          <span>© {new Date().getFullYear()} SharedNest. All rights reserved.</span>
-          <span>Marketplace &amp; matching platform — informational only, not advice.</span>
+        <div className="container-page py-5 text-xs text-muted-foreground flex flex-col sm:flex-row gap-2 justify-between items-center sm:items-start">
+          <span className="text-center sm:text-left">© {new Date().getFullYear()} SharedNest. All rights reserved.</span>
+          <span className="text-center sm:text-left">Marketplace &amp; matching platform — informational only, not advice.</span>
+          <span className="text-[11px] text-foreground/40 text-center sm:text-right">
+            Website prototype developed by Antonis Kotopoulis
+          </span>
         </div>
       </div>
     </footer>
