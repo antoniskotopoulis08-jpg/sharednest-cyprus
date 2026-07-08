@@ -68,17 +68,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "SharedNest — Co-own your dream home in Cyprus" },
+      { title: "SharedNest — Shared ownership, simplified" },
       {
         name: "description",
         content:
-          "SharedNest is an AI-powered marketplace for real estate co-ownership in Cyprus. Buy a share of a villa, apartment or townhouse alongside verified co-buyers.",
+          "SharedNest is an AI-powered marketplace for real estate co-ownership in Cyprus. Shared ownership, simplified — buy a share of a villa, apartment or townhouse alongside verified co-buyers.",
       },
-      { property: "og:title", content: "SharedNest — Co-own your dream home in Cyprus" },
+      { property: "og:title", content: "SharedNest — Shared ownership, simplified" },
       {
         property: "og:description",
         content:
-          "AI-powered real estate co-ownership marketplace in Cyprus. Own a share of a home in Limassol, Paphos, Larnaca, Nicosia and Ayia Napa.",
+          "AI-powered real estate co-ownership marketplace in Cyprus. Shared ownership, simplified across Limassol, Paphos, Larnaca, Nicosia and Ayia Napa.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -91,7 +91,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap",
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
     ],
   }),
   shellComponent: RootShell,
