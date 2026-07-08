@@ -160,7 +160,7 @@
 }
 
 @utility glass-dark {
-  background: color-mix(in oklab, oklch(0.18 0.06 250) 55%, transparent);
+  background: color-mix(in oklab, oklch(0.18 0.06 150) 55%, transparent);
   backdrop-filter: blur(24px) saturate(140%);
   border: 1px solid color-mix(in oklab, white 12%, transparent);
 }
