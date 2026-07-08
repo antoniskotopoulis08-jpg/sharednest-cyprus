@@ -297,7 +297,7 @@ function PathsSplit() {
                   style={{ background: "var(--gradient-gold)" }}
                 />
                 <div className="relative">
-                  <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-[10px] font-mono uppercase tracking-[0.25em] text-white/60">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-[color:var(--gold)]/40 bg-[color:var(--gold)]/10 px-3 py-1.5 text-[10px] font-mono uppercase tracking-[0.25em] text-[color:var(--gold)]">
                     <Icon className="h-3 w-3 text-[color:var(--gold)]" />
                     {p.eyebrow}
                   </div>
