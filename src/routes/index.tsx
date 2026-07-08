@@ -177,20 +177,26 @@ function Hero() {
               </Link>
             </div>
 
-            {/* Trust strip */}
-            <div className="mt-12 grid grid-cols-3 max-w-lg gap-6">
-              {[
-                ["120+", "Verified listings"],
-                ["6", "Cyprus regions"],
-                ["12.5%", "Min. stake"],
-              ].map(([n, l]) => (
-                <div key={l} className="border-l border-white/15 pl-4">
-                  <div className="font-serif text-2xl text-[color:var(--gold)]">{n}</div>
-                  <div className="mt-1 text-[10px] uppercase tracking-[0.2em] text-white/50 font-mono">
-                    {l}
+            {/* Premium trust strip */}
+            <div className="mt-10 max-w-2xl rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-md p-5 md:p-6">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 md:gap-0">
+                {[
+                  ["120+", "Verified listings"],
+                  ["6", "Cyprus regions"],
+                  ["12.5%", "Min. ownership stake"],
+                  ["AI", "AI-powered matching"],
+                ].map(([n, l], i) => (
+                  <div key={l} className="relative px-0 md:px-6 lg:text-center">
+                    {i > 0 && (
+                      <div className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 h-8 w-px bg-[color:var(--gold)]/20" />
+                    )}
+                    <div className="font-serif text-xl md:text-2xl text-[color:var(--gold)]">{n}</div>
+                    <div className="mt-1 text-[10px] uppercase tracking-[0.2em] text-white/70 font-mono">
+                      {l}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
 
