@@ -186,7 +186,7 @@ function Hero() {
                   ["12.5%", "Min. ownership stake"],
                   ["AI", "AI-powered matching"],
                 ].map(([n, l], i) => (
-                  <div key={l} className="relative px-0 md:px-6 lg:text-center">
+                  <div key={l} className="relative px-0 md:px-6 text-center">
                     {i > 0 && (
                       <div className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 h-8 w-px bg-[color:var(--gold)]/20" />
                     )}
