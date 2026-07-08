@@ -18,18 +18,51 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-// Featured trio per brief
-const FEATURED_IDS = ["lim-01", "paf-01", "lar-01"] as const;
+// Featured trio per brief — Cyprus, EUR, stake buttons, mode
+const FEATURED: LuxeCardData[] = [
+  {
+    id: "lim-01",
+    title: "Limassol Seafront Apartment",
+    city: "Limassol, Cyprus",
+    image: limassolImg,
+    fullPrice: 850_000,
+    stakes: [12.5, 25, 50],
+    matchPct: 94,
+    monthly: 1250,
+    mode: "invest",
+    tagline: "High rental potential",
+  },
+  {
+    id: "paf-01",
+    title: "Paphos Holiday Villa",
+    city: "Paphos, Cyprus",
+    image: paphosImg,
+    fullPrice: 620_000,
+    stakes: [12.5, 25, 50],
+    matchPct: 91,
+    monthly: 940,
+    mode: "invest",
+    tagline: "Holiday + investment",
+  },
+  {
+    id: "lar-01",
+    title: "Larnaca City Apartment",
+    city: "Larnaca, Cyprus",
+    image: larnacaImg,
+    fullPrice: 320_000,
+    stakes: [12.5, 25, 50],
+    matchPct: 88,
+    monthly: 560,
+    mode: "lifestyle",
+    tagline: "Residency / lifestyle",
+  },
+];
 
 function Home() {
-  const featured = FEATURED_IDS
-    .map((id) => properties.find((p) => p.id === id))
-    .filter((p): p is NonNullable<typeof p> => Boolean(p));
-
   return (
     <div>
       <Hero />
-      <FeaturedProperties featured={featured} />
+      <FeaturedProperties />
       <HowItWorks />
       <MatchmakerPreview />
       <AffordabilityComparison />
@@ -40,110 +73,103 @@ function Home() {
   );
 }
 
-/* ─────────────────────────  1. HERO  ───────────────────────── */
+/* ─────────────────────────  1. HERO (dark luxury)  ───────────────────────── */
 function Hero() {
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden bg-[oklch(0.11_0.035_250)] text-white">
+      {/* Ambient background */}
       <div className="absolute inset-0">
         <img
           src={heroImg}
-          alt="Cyprus villa at sunset"
-          width={1920}
-          height={1200}
-          className="h-full w-full object-cover scale-105"
+          alt=""
+          className="h-full w-full object-cover opacity-30"
         />
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(105deg, oklch(0.18 0.06 250 / 0.92) 0%, oklch(0.22 0.07 250 / 0.75) 45%, oklch(0.18 0.06 250 / 0.15) 100%)",
+              "radial-gradient(1000px 600px at 15% 10%, oklch(0.28 0.08 245 / 0.5), transparent 60%), linear-gradient(180deg, oklch(0.11 0.035 250 / 0.85) 0%, oklch(0.11 0.035 250 / 0.98) 75%)",
           }}
+        />
+        {/* gold ember */}
+        <div
+          className="absolute -right-40 top-20 h-[520px] w-[520px] rounded-full opacity-25 blur-3xl"
+          style={{ background: "var(--gradient-gold)" }}
         />
       </div>
 
-      <div className="relative container-page pt-20 pb-24 md:pt-28 md:pb-36 text-primary-foreground">
-        <div className="grid lg:grid-cols-12 gap-10 items-end">
-          <div className="lg:col-span-8 animate-reveal">
-            <div className="eyebrow" style={{ color: "oklch(0.85 0.13 82)" }}>
-              <span className="inline-flex items-center gap-2">
-                <span className="h-1 w-1 rounded-full bg-gold" />
-                Cyprus · Co-ownership marketplace
-              </span>
+      <div className="relative container-page pt-20 pb-24 md:pt-28 md:pb-32">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          {/* Left copy */}
+          <div className="lg:col-span-7 animate-reveal">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 backdrop-blur px-3 py-1.5 text-[11px] font-mono uppercase tracking-[0.25em] text-white/70">
+              <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--gold)] animate-pulse" />
+              Cyprus · Co-ownership marketplace
             </div>
-            <h1 className="mt-6 text-display text-5xl md:text-7xl lg:text-[5.75rem]">
-              Own a share of your{" "}
-              <em className="italic text-gold" style={{ fontFamily: "var(--font-serif)" }}>
-                dream home
-              </em>{" "}
-              in Cyprus.
+
+            <h1 className="mt-7 font-serif tracking-tight text-5xl md:text-7xl lg:text-[5.25rem] leading-[0.98]">
+              Own a share of{" "}
+              <em className="italic text-[color:var(--gold)] font-serif">Cyprus'</em>{" "}
+              most desirable homes.
             </h1>
-            <p className="mt-8 max-w-xl text-lg text-primary-foreground/75 leading-relaxed">
-              Share B&amp;B helps verified buyers co-buy homes, villas, and apartments
-              through an AI-powered real estate marketplace.
+
+            <p className="mt-8 max-w-xl text-lg text-white/70 leading-relaxed">
+              Share B&amp;B uses AI to match buyers with co-ownership opportunities
+              based on budget, lifestyle, location, and ownership goals.
             </p>
+
             <div className="mt-10 flex flex-wrap gap-3">
               <Link
                 to="/browse"
-                className="group inline-flex items-center gap-2 rounded-sm px-6 py-3.5 text-sm font-medium text-gold-foreground hover:opacity-90 transition-all"
+                className="group inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-medium text-[color:var(--gold-foreground)] hover:opacity-90 transition-all"
                 style={{ background: "var(--gradient-gold)" }}
               >
-                Browse properties
+                <TrendingUp className="h-4 w-4" />
+                Explore Investment Shares
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
-                to="/matchmaker"
-                className="inline-flex items-center gap-2 rounded-sm border border-primary-foreground/25 px-6 py-3.5 text-sm font-medium hover:bg-primary-foreground/5 transition-colors"
+                to="/browse"
+                className="group inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 backdrop-blur px-6 py-3.5 text-sm font-medium text-white hover:bg-white/10 transition-colors"
               >
-                <Sparkles className="h-4 w-4" /> Take AI Match Quiz
+                <HomeIcon className="h-4 w-4 text-[color:var(--gold)]" />
+                Find a Home for Lifestyle or Residency
               </Link>
+            </div>
+
+            {/* Trust strip */}
+            <div className="mt-12 grid grid-cols-3 max-w-lg gap-6">
+              {[
+                ["120+", "Verified listings"],
+                ["6", "Cyprus regions"],
+                ["12.5%", "Min. stake"],
+              ].map(([n, l]) => (
+                <div key={l} className="border-l border-white/15 pl-4">
+                  <div className="font-serif text-2xl text-[color:var(--gold)]">{n}</div>
+                  <div className="mt-1 text-[10px] uppercase tracking-[0.2em] text-white/50 font-mono">
+                    {l}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
-          <div className="lg:col-span-4 animate-reveal-in" style={{ animationDelay: "200ms" }}>
-            <div className="glass-dark rounded-2xl p-6 text-primary-foreground">
-              <div className="eyebrow" style={{ color: "oklch(0.85 0.13 82)" }}>
-                Featured share
-              </div>
-              <div className="mt-4 flex items-start gap-4">
-                <img
-                  src={limassolImg}
-                  alt=""
-                  width={120}
-                  height={120}
-                  className="h-20 w-20 rounded-lg object-cover"
-                />
-                <div className="min-w-0">
-                  <div className="text-xs opacity-70 flex items-center gap-1">
-                    <MapPin className="h-3 w-3" /> Limassol
-                  </div>
-                  <div className="font-serif text-lg leading-tight truncate">
-                    Seafront Infinity Villa
-                  </div>
-                  <div className="mt-2 text-xs opacity-70">10% share from</div>
-                  <div className="font-serif text-2xl text-gold">{formatEUR(240_000)}</div>
-                </div>
-              </div>
-              <div className="mt-5 pt-5 border-t border-white/10 grid grid-cols-3 gap-3 text-center">
-                {[["120+", "Listings"], ["5", "Regions"], ["10%", "Min share"]].map(([n, l]) => (
-                  <div key={l}>
-                    <div className="font-serif text-xl text-gold">{n}</div>
-                    <div className="text-[10px] uppercase tracking-widest opacity-60 mt-1">{l}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
+          {/* Right: featured luxe card */}
+          <div className="lg:col-span-5 animate-reveal-in" style={{ animationDelay: "200ms" }}>
+            <LuxeShareCard data={FEATURED[0]} />
           </div>
         </div>
       </div>
 
-      <div className="relative border-t border-white/10 bg-primary/40 backdrop-blur-sm text-primary-foreground/70 overflow-hidden">
+      {/* Bottom ticker */}
+      <div className="relative border-t border-white/10 bg-black/30 backdrop-blur-sm text-white/60 overflow-hidden">
         <div className="flex whitespace-nowrap animate-ticker py-3 text-xs uppercase tracking-[0.3em]">
           {Array.from({ length: 2 }).map((_, i) => (
             <div key={i} className="flex shrink-0">
-              {["Limassol", "Paphos", "Larnaca", "Nicosia", "Ayia Napa", "Kyrenia coast", "Troodos hills"].map(
+              {["Limassol", "Paphos", "Larnaca", "Nicosia", "Ayia Napa", "Troodos hills"].map(
                 (c) => (
                   <span key={c + i} className="mx-8 flex items-center gap-3">
-                    <Waves className="h-3 w-3 text-gold" /> {c}
+                    <Waves className="h-3 w-3 text-[color:var(--gold)]" /> {c}
                   </span>
                 )
               )}
@@ -156,37 +182,40 @@ function Hero() {
 }
 
 /* ─────────────────────────  2. FEATURED  ───────────────────────── */
-function FeaturedProperties({ featured }: { featured: typeof properties }) {
-  // Override titles to match brief exactly
-  const overrides: Record<string, { title: string; image: string }> = {
-    "lim-01": { title: "Limassol Seafront Apartment", image: limassolImg },
-    "paf-01": { title: "Paphos Holiday Villa", image: paphosImg },
-    "lar-01": { title: "Larnaca City Loft", image: larnacaImg },
-  };
-  const cards = featured.map((p) => ({ ...p, ...(overrides[p.id] ?? {}) }));
-
+function FeaturedProperties() {
   return (
-    <section className="container-page py-24">
-      <div className="flex items-end justify-between gap-4 flex-wrap mb-10">
-        <div>
-          <div className="eyebrow">01 — Featured this week</div>
-          <h2 className="mt-3 text-display text-4xl md:text-5xl">
-            Handpicked shares.
-          </h2>
-        </div>
-        <Link
-          to="/browse"
-          className="text-sm inline-flex items-center gap-2 border-b border-foreground/30 pb-1 hover:border-gold transition-colors"
-        >
-          View all listings <ArrowRight className="h-4 w-4" />
-        </Link>
-      </div>
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {cards.map((p, i) => (
-          <div key={p.id} className="animate-reveal" style={{ animationDelay: `${i * 120}ms` }}>
-            <PropertyCard p={p} />
+    <section className="relative bg-[oklch(0.11_0.035_250)] text-white overflow-hidden">
+      <div
+        className="absolute inset-0 opacity-40 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(800px 400px at 90% 0%, oklch(0.3 0.08 245 / 0.4), transparent 70%)",
+        }}
+      />
+      <div className="relative container-page py-24">
+        <div className="flex items-end justify-between gap-4 flex-wrap mb-10">
+          <div>
+            <div className="text-[10px] uppercase tracking-[0.3em] text-[color:var(--gold)] font-mono">
+              01 — Featured this week
+            </div>
+            <h2 className="mt-4 font-serif text-4xl md:text-5xl leading-[1.05] max-w-2xl">
+              Handpicked shares in Cyprus' most coveted addresses.
+            </h2>
           </div>
-        ))}
+          <Link
+            to="/browse"
+            className="text-sm inline-flex items-center gap-2 border-b border-white/30 pb-1 hover:border-[color:var(--gold)] text-white transition-colors"
+          >
+            View all listings <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {FEATURED.map((p, i) => (
+            <div key={p.id} className="animate-reveal" style={{ animationDelay: `${i * 120}ms` }}>
+              <LuxeShareCard data={p} />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
