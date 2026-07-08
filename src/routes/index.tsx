@@ -148,9 +148,9 @@ function Hero() {
             </div>
 
             <h1 className="mt-7 font-serif tracking-tight text-5xl md:text-7xl lg:text-[5.25rem] leading-[0.98]">
-              Own a share of{" "}
-              <em className="italic text-[color:var(--gold)] font-serif">Cyprus'</em>{" "}
-              most desirable homes.
+              ShareNest turns{" "}
+              <em className="italic text-[color:var(--gold)] font-serif">&ldquo;someday&rdquo;</em>{" "}
+              into <em className="italic text-[color:var(--gold)] font-serif">&ldquo;now.&rdquo;</em>
             </h1>
 
             <p className="mt-8 max-w-xl text-lg text-white/70 leading-relaxed">
