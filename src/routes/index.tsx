@@ -341,9 +341,9 @@ function PathsSplit() {
           <p>
             <span className="text-white/75 font-medium">Important.</span> Share B&amp;B is
             a marketplace and matching platform. We do not provide legal, financial, tax,
-            investment, immigration, or real estate brokerage advice, and we do not
-            guarantee rental returns or residency approval. Please speak with a licensed
-            Cypriot lawyer, tax advisor, and immigration specialist before committing.
+            investment, immigration, or real estate brokerage advice. All estimates are
+            for informational purposes only. Users should consult licensed legal, tax,
+            financial, and immigration professionals before making decisions.
           </p>
         </div>
       </div>
