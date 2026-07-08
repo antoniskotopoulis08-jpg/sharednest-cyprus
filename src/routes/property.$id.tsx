@@ -1,7 +1,12 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { properties, formatEUR } from "@/lib/properties";
-import { BedDouble, Bath, Ruler, MapPin, ShieldCheck, ArrowRight } from "lucide-react";
+import {
+  BedDouble, Bath, Ruler, MapPin, ShieldCheck, ArrowRight,
+  TrendingUp, Home as HomeIcon, AlertTriangle, Calculator, Gauge,
+  Repeat, Users, Waves, School, ShoppingBag, Utensils, CalendarDays,
+  Wallet, Stamp, CheckCircle2, ScrollText,
+} from "lucide-react";
 import { Disclaimer } from "@/components/disclaimer";
 
 export const Route = createFileRoute("/property/$id")({
