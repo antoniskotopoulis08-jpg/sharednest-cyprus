@@ -31,7 +31,7 @@ export function SiteHeader() {
               to={n.to}
               className="text-muted-foreground hover:text-foreground transition-colors"
               activeProps={{ className: "text-foreground font-medium" }}
-              activeOptions={{ exact: n.to === "/" }}
+              
             >
               {n.label}
             </Link>
@@ -63,7 +63,7 @@ export function SiteHeader() {
                 onClick={() => setOpen(false)}
                 className="py-2 text-sm text-muted-foreground hover:text-foreground"
                 activeProps={{ className: "py-2 text-sm text-foreground font-medium" }}
-                activeOptions={{ exact: n.to === "/" }}
+                
               >
                 {n.label}
               </Link>
