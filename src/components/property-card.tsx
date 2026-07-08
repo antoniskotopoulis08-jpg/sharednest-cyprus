@@ -54,7 +54,7 @@ export function PropertyCard({ p }: { p: Property }) {
           <span className="flex items-center gap-1.5"><BedDouble className="h-3.5 w-3.5" /> {p.bedrooms}</span>
           <span className="flex items-center gap-1.5"><Bath className="h-3.5 w-3.5" /> {p.bathrooms}</span>
           <span className="flex items-center gap-1.5"><Ruler className="h-3.5 w-3.5" /> {p.sizeSqm} m²</span>
-          <span className="ml-auto inline-flex items-center gap-1 text-foreground/60 group-hover:text-gold transition-colors">
+          <span className="ml-auto inline-flex items-center gap-1 text-foreground/85 group-hover:text-gold transition-colors">
             View <ArrowUpRight className="h-3.5 w-3.5" />
           </span>
         </div>

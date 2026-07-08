@@ -8,7 +8,7 @@ export function Disclaimer({ className = "" }: { className?: string }) {
         className
       }
     >
-      <Info className="h-5 w-5 shrink-0 text-gold-foreground/70 mt-0.5" />
+      <Info className="h-5 w-5 shrink-0 text-gold mt-0.5" />
       <p className="leading-relaxed">
         SharedNest is a marketplace and matching platform. We do not provide legal,
         financial, tax, investment, immigration, or real estate brokerage advice. All

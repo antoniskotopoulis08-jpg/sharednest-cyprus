@@ -207,7 +207,7 @@ function TabBtn({
         "inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all " +
         (active
           ? "text-[color:var(--gold-foreground)] shadow-sm"
-          : "text-muted-foreground hover:text-foreground")
+          : "text-foreground/75 hover:text-foreground")
       }
       style={active ? { background: "var(--gradient-gold)" } : undefined}
     >

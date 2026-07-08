@@ -337,7 +337,7 @@ function Matchmaker() {
                 <Target className="h-3.5 w-3.5 text-gold" />
                 Step {step + 1} of {total}
                 {track && (
-                  <span className="ml-2 rounded-full border border-border px-2 py-0.5 text-[10px] uppercase tracking-widest">
+                  <span className="ml-2 rounded-full border border-gold/40 bg-gold/10 px-2 py-0.5 text-[10px] uppercase tracking-widest text-gold">
                     {track === "invest" ? "Investment track" : "Residency track"}
                   </span>
                 )}

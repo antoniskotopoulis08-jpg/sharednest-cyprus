@@ -159,7 +159,7 @@ export function LuxeShareCard({ data }: { data: LuxeCardData }) {
       <div className="p-5 text-white">
         <div className="min-w-0">
           <h3 className="font-serif text-2xl leading-tight truncate">{data.title}</h3>
-          <div className="mt-1 text-xs text-white/50">
+          <div className="mt-1 text-xs text-white/80">
             Full property {formatEUR(data.fullPrice)} · from {formatEUR(derived.minSharePrice)}{" "}
             ({derived.minStake}%)
           </div>
@@ -292,7 +292,7 @@ export function LuxeShareCard({ data }: { data: LuxeCardData }) {
 
         {/* Stake selector */}
         <div className="mt-5">
-          <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-white/50 font-mono mb-2">
+          <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-white/80 font-mono mb-2">
             <span>Ownership stake</span>
             <span className="text-white/70">{stake}%</span>
           </div>
@@ -351,7 +351,7 @@ function ToggleBtn({
         "inline-flex items-center justify-center gap-1.5 rounded-full py-1.5 text-[11px] font-medium transition-all " +
         (active
           ? "text-[color:var(--gold-foreground)]"
-          : "text-white/60 hover:text-white")
+          : "text-white/80 hover:text-white")
       }
       style={active ? { background: "var(--gradient-gold)" } : undefined}
     >
@@ -366,7 +366,7 @@ function Stat({
 }: { label: string; value: React.ReactNode; valueClass?: string }) {
   return (
     <div>
-      <div className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-mono">{label}</div>
+      <div className="text-[10px] uppercase tracking-[0.2em] text-white/80 font-mono">{label}</div>
       <div className={"mt-1 font-serif text-2xl tabular-nums " + valueClass}>{value}</div>
     </div>
   );
@@ -393,7 +393,7 @@ function MicroStat({
       : "text-white";
   return (
     <div className="rounded-lg border border-white/10 bg-white/[0.03] p-3 transition-colors hover:border-white/20">
-      <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.18em] text-white/50 font-mono">
+      <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.18em] text-white/80 font-mono">
         <span className="text-[color:var(--gold)]">{icon}</span>
         {label}
       </div>
@@ -413,7 +413,7 @@ function MicroStat({
           />
         </div>
       )}
-      {sub && <div className="mt-1 text-[10px] text-white/45">{sub}</div>}
+      {sub && <div className="mt-1 text-[10px] text-white/75">{sub}</div>}
     </div>
   );
 }
