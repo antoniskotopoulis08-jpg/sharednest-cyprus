@@ -3,14 +3,12 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const nav = [
-  { to: "/", label: "Home" },
-  { to: "/browse", label: "Browse" },
-  { to: "/how-it-works", label: "How it works" },
-  { to: "/calculator", label: "Calculator" },
+  { to: "/browse", label: "Browse Properties" },
+  { to: "/invest", label: "Invest" },
+  { to: "/residency", label: "Residency & Lifestyle" },
   { to: "/matchmaker", label: "AI Matchmaker" },
-  { to: "/list-property", label: "List a property" },
-  { to: "/dashboard", label: "Dashboard" },
-  { to: "/contact", label: "Contact" },
+  { to: "/how-it-works", label: "How It Works" },
+  { to: "/list-property", label: "List a Property" },
 ] as const;
 
 export function SiteHeader() {
@@ -33,7 +31,7 @@ export function SiteHeader() {
               to={n.to}
               className="text-muted-foreground hover:text-foreground transition-colors"
               activeProps={{ className: "text-foreground font-medium" }}
-              activeOptions={{ exact: n.to === "/" }}
+              
             >
               {n.label}
             </Link>
@@ -65,7 +63,7 @@ export function SiteHeader() {
                 onClick={() => setOpen(false)}
                 className="py-2 text-sm text-muted-foreground hover:text-foreground"
                 activeProps={{ className: "py-2 text-sm text-foreground font-medium" }}
-                activeOptions={{ exact: n.to === "/" }}
+                
               >
                 {n.label}
               </Link>
