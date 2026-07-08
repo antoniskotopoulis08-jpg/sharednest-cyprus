@@ -16,7 +16,8 @@ export function SiteFooter() {
             <strong className="text-foreground">Disclaimer.</strong> Share B&amp;B is a
             marketplace and matching platform. We do not provide legal, financial, tax,
             investment, immigration, or real estate brokerage advice. All estimates are
-            informational only and professional review is required.
+            for informational purposes only. Users should consult licensed professionals
+            before making decisions.
           </p>
         </div>
         <div>
