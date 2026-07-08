@@ -236,7 +236,7 @@ function PathsSplit() {
       ],
       ctaLabel: "I Want to Invest",
       ctaIcon: TrendingUp,
-      note: "Estimates only. Returns are never guaranteed.",
+      note: "Estimated rental potential shown for informational purposes only. Professional review required.",
     },
     {
       key: "lifestyle",
