@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { cities, propertyTypes, uses, formatEUR, properties } from "@/lib/properties";
 import { PropertyCard } from "@/components/property-card";
 import { Sparkles, Users } from "lucide-react";
 import { Disclaimer } from "@/components/disclaimer";
+import { CountUp } from "@/components/count-up";
 
 export const Route = createFileRoute("/matchmaker")({
   head: () => ({
@@ -140,18 +141,15 @@ function Matchmaker() {
               <Users className="h-5 w-5 text-gold" /> Compatible co-buyers
             </h2>
             <div className="mt-4 grid gap-3">
-              {buyerMatches.map((b) => (
-                <div key={b.name} className="flex items-center justify-between rounded-lg border border-border bg-card p-4">
-                  <div>
+              {buyerMatches.map((b, i) => (
+                <div key={b.name} className="flex items-center justify-between gap-4 rounded-lg border border-border bg-card p-4">
+                  <div className="min-w-0">
                     <div className="font-medium">{b.name}</div>
-                    <div className="text-xs text-muted-foreground">
+                    <div className="text-xs text-muted-foreground truncate">
                       {b.city} · {b.use} · budget {formatEUR(b.budget)}
                     </div>
                   </div>
-                  <div className="text-right">
-                    <div className="font-serif text-2xl text-primary">{b.score}%</div>
-                    <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Compatibility</div>
-                  </div>
+                  <ScoreRing key={`${b.name}-${b.score}`} score={b.score} delay={i * 120} />
                 </div>
               ))}
             </div>
