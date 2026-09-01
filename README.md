@@ -1,79 +1,101 @@
-# Cyprus Share Homes
+# SharedNest — Cyprus Property Co-Ownership Prototype
 
-follow this prompt:
-Build a premium startup website for “Share B&B”, an AI-powered real estate co-ownership marketplace in Cyprus.
+A responsive web application prototype for a fractional property co-ownership marketplace in Cyprus.
 
-The concept:
+🔗 **Live Demo:** https://cyprus-share-dream.lovable.app/
 
-Property owners list homes, villas, and apartments. Verified buyers can buy a percentage of a property together with other buyers. The platform acts only as a marketplace and does not provide legal, financial, or investment advice.
+## About the Project
 
-Style:
+SharedNest explores a marketplace model in which multiple buyers can purchase shares of a holiday property together.
 
-Luxury, modern, trustworthy, Mediterranean, Cyprus-inspired. Use a clean design with white space, soft beige, deep blue, gold accents, and high-end real estate visuals.
+Owners receive usage rights based on their ownership share and, when the property is not being used by them, it can potentially be rented to generate proportional rental income.
 
-Pages:
+The concept was developed as part of a team startup challenge during a **KPMG Cyprus summer programme in July 2026**.
 
-1. Home page
+I independently designed and built the web application prototype, using AI-assisted development with Lovable to rapidly translate the business concept into an interactive product experience.
 
-2. Browse Properties
+## My Contribution
 
-3. Property Details
+I was responsible for the website prototype, including:
 
-4. How It Works
+- Translating the team's business concept into the product structure and user experience
+- Designing and building the responsive interface using Lovable and AI-assisted development
+- Creating the property discovery and property-detail experiences
+- Building interactive investment and affordability calculators
+- Developing the co-buyer matching questionnaire and compatibility interface
+- Creating investment, residency and lifestyle-focused user journeys
+- Building the property-listing and contact flows
+- Iteratively refining the design, content and functionality during the programme
 
-5. AI Co-Buyer Matchmaker
+The wider startup concept and business model were developed collaboratively by the KPMG programme team; the website implementation was my individual contribution.
 
-6. Owner Listing Page
+## Features
 
-7. Buyer Dashboard
+### Property Marketplace
+Browse sample properties across Cyprus, including Limassol, Paphos, Larnaca, Nicosia and Ayia Napa, with information on:
 
-8. Contact Page
+- Property value
+- Available ownership shares
+- Estimated monthly costs
+- Rental-income estimates
+- Occupancy potential
+- Lifestyle and investment indicators
 
-Features:
+### Property Details
+Individual property pages provide a more detailed view of each opportunity and its ownership characteristics.
 
-- Hero section with headline: “Own a share of your dream home in Cyprus.”
+### Affordability Calculator
+Interactive calculations allow users to explore different ownership-share and affordability scenarios.
 
-- Search filters: city, price, property type, minimum share, expected use
+### Co-Buyer Matchmaker
+A questionnaire-based prototype demonstrates how potential co-buyers could be matched according to factors such as:
 
-- Property cards with full price, available share price, location, expected monthly costs
+- Budget
+- Desired ownership share
+- Property usage preferences
+- Lifestyle preferences
+- Long-term ownership goals
 
-- AI matchmaker questionnaire
+> **Note:** The current matching system is a prototype using deterministic scoring logic and is not connected to a production AI model.
 
-- Co-buyer compatibility score
+### Investment & Residency Experiences
+Dedicated pages demonstrate how the platform could present properties from investment and lifestyle/residency perspectives.
 
-- Affordability calculator
+### Buyer Dashboard
+A prototype dashboard demonstrates how users could manage saved properties and potential co-ownership opportunities.
 
-- Owner listing form
+### Property Listing
+A prototype workflow allows property owners to enter information about a property they would like to list.
 
-- Buyer dashboard showing saved properties and matched buyers
+### Responsive Design
+The interface is designed for both desktop and mobile devices.
 
-- Trust section explaining lawyers, due diligence, title deed checks, and secure process
+## Technology
 
-- Disclaimer: Share B&B is a marketplace and does not provide legal, financial, or investment advice.
+The prototype uses a modern TypeScript/React stack:
 
-Make it responsive for mobile and desktop.
+- **React 19**
+- **TypeScript**
+- **TanStack Start**
+- **TanStack Router**
+- **TanStack Query**
+- **Tailwind CSS**
+- **Radix UI**
+- **Recharts**
+- **Vite**
+- **Lovable** for AI-assisted rapid development
 
-Use realistic sample properties in Limassol, Paphos, Larnaca, Nicosia, and Ayia Napa.
+## Running the Project Locally
 
-This project was built with [Lovable](https://lovable.dev).
+### Requirements
 
-**Live app**: https://cyprus-share-dream.lovable.app
+- Node.js
+- npm
 
-## Build with Lovable
+### Installation
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/9cd179c2-c6b0-456b-8f90-22951c581731).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+```bash
+git clone https://github.com/antoniskotopoulis08-jpg/cyprus-share-dream.git
+cd cyprus-share-dream
+npm install
 npm run dev
-```
