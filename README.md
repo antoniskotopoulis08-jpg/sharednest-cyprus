@@ -1,4 +1,14 @@
 # SharedNest — Cyprus Property Co-Ownership Prototype
+## Screenshots
+
+### Homepage
+![SharedNest homepage](screenshots/homepage.png)
+
+### Property Marketplace
+![SharedNest property marketplace](screenshots/browse-properties.png)
+
+### Co-Buyer Matchmaker
+![SharedNest co-buyer matchmaker](screenshots/ai-matchmaker.png)
 
 A responsive web application prototype for a fractional property co-ownership marketplace in Cyprus.
 
