@@ -1,4 +1,9 @@
 # SharedNest — Cyprus Property Co-Ownership Prototype
+
+A responsive web application prototype for a fractional property co-ownership marketplace in Cyprus.
+
+🔗 **Live Demo:** https://cyprus-share-dream.lovable.app/
+
 ## Screenshots
 
 ### Homepage
@@ -10,12 +15,7 @@
 ### Co-Buyer Matchmaker
 ![SharedNest co-buyer matchmaker](screenshots/ai-matchmaker.png)
 
-A responsive web application prototype for a fractional property co-ownership marketplace in Cyprus.
-
-🔗 **Live Demo:** https://cyprus-share-dream.lovable.app/
-
 ## About the Project
-
 SharedNest explores a marketplace model in which multiple buyers can purchase shares of a holiday property together.
 
 Owners receive usage rights based on their ownership share and, when the property is not being used by them, it can potentially be rented to generate proportional rental income.
