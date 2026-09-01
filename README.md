@@ -95,7 +95,7 @@ The prototype uses a modern TypeScript/React stack:
 ### Installation
 
 ```bash
-git clone https://github.com/antoniskotopoulis08-jpg/cyprus-share-dream.git
+git clone https://github.com/antoniskotopoulis08-jpg/sharednest-cyprus.git
 cd cyprus-share-dream
 npm install
 npm run dev
